@@ -96,18 +96,20 @@
 
 
 
-  <meta name="description" content="抓取实时log: adb logcat adb logcat -v time         打印结果带上时间 adb logcat *:E             打印Error日志 adb logcat -s DealData:E   打印tag为Error的Error日志 adb logcat &amp;gt; E:\log.txt    打印日志并保存到log.txt   唤醒屏幕: adb s">
-<meta name="keywords" content="工具">
+  <meta name="description" content="情况1234567com.android.tools.build:gradle:2.2.2 ----&amp;gt; com.android.tools.build:gradle:3.0.1buildVersion     : &apos;25.0.0&apos; ----&amp;gt; buildVersion     : &quot;26.1.0&quot;compileSdkVersion: 23       ----&amp;gt; compileS">
+<meta name="keywords" content="记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="adb">
-<meta property="og:url" content="http://yoursite.com/2019/04/29/adb/index.html">
+<meta property="og:title" content="升级targetsdk到26">
+<meta property="og:url" content="http://yoursite.com/2019/08/29/targetsdkupdate/index.html">
 <meta property="og:site_name" content="xyuxiao">
-<meta property="og:description" content="抓取实时log: adb logcat adb logcat -v time         打印结果带上时间 adb logcat *:E             打印Error日志 adb logcat -s DealData:E   打印tag为Error的Error日志 adb logcat &amp;gt; E:\log.txt    打印日志并保存到log.txt   唤醒屏幕: adb s">
+<meta property="og:description" content="情况1234567com.android.tools.build:gradle:2.2.2 ----&amp;gt; com.android.tools.build:gradle:3.0.1buildVersion     : &apos;25.0.0&apos; ----&amp;gt; buildVersion     : &quot;26.1.0&quot;compileSdkVersion: 23       ----&amp;gt; compileS">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-03T08:24:55.426Z">
+<meta property="og:image" content="http://yoursite.com/images/targetsdkupdate/target_update_error.png">
+<meta property="og:updated_time" content="2019-09-03T07:54:49.924Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="adb">
-<meta name="twitter:description" content="抓取实时log: adb logcat adb logcat -v time         打印结果带上时间 adb logcat *:E             打印Error日志 adb logcat -s DealData:E   打印tag为Error的Error日志 adb logcat &amp;gt; E:\log.txt    打印日志并保存到log.txt   唤醒屏幕: adb s">
+<meta name="twitter:title" content="升级targetsdk到26">
+<meta name="twitter:description" content="情况1234567com.android.tools.build:gradle:2.2.2 ----&amp;gt; com.android.tools.build:gradle:3.0.1buildVersion     : &apos;25.0.0&apos; ----&amp;gt; buildVersion     : &quot;26.1.0&quot;compileSdkVersion: 23       ----&amp;gt; compileS">
+<meta name="twitter:image" content="http://yoursite.com/images/targetsdkupdate/target_update_error.png">
 
 
 
@@ -115,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/29/adb/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/29/targetsdkupdate/">
 
 
 
@@ -125,7 +127,7 @@
   };
 </script>
 
-  <title>adb | xyuxiao</title>
+  <title>升级targetsdk到26 | xyuxiao</title>
   
 
 
@@ -362,7 +364,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/adb/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/targetsdkupdate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -379,7 +381,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">adb
+          <h1 class="post-title" itemprop="name headline">升级targetsdk到26
 
               
             
@@ -406,7 +408,7 @@
                 
               
 
-              <time title="创建时间：2019-04-29 10:02:25" itemprop="dateCreated datePublished" datetime="2019-04-29T10:02:25Z">2019-04-29</time>
+              <time title="创建时间：2019-08-29 15:54:56" itemprop="dateCreated datePublished" datetime="2019-08-29T15:54:56Z">2019-08-29</time>
             
 
             
@@ -423,7 +425,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-03 08:24:55" itemprop="dateModified" datetime="2019-07-03T08:24:55Z">2019-07-03</time>
+                <time title="修改时间：2019-09-03 07:54:49" itemprop="dateModified" datetime="2019-09-03T07:54:49Z">2019-09-03</time>
               
             
           </span>
@@ -482,25 +484,37 @@
       
 
       
-        <ol>
-<li>抓取实时log: adb logcat<ul>
-<li>adb logcat -v time         打印结果带上时间</li>
-<li>adb logcat *:E             打印Error日志</li>
-<li>adb logcat -s DealData:E   打印tag为Error的Error日志</li>
-<li>adb logcat &gt; E:\log.txt    打印日志并保存到log.txt</li>
+        <h3 id="情况"><a href="#情况" class="headerlink" title="情况"></a>情况</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">com.android.tools.<span class="string">build:</span><span class="string">gradle:</span><span class="number">2.2</span><span class="number">.2</span> ----&gt; com.android.tools.<span class="string">build:</span><span class="string">gradle:</span><span class="number">3.0</span><span class="number">.1</span></span><br><span class="line"></span><br><span class="line"><span class="string">buildVersion     :</span> <span class="string">'25.0.0'</span> ----&gt; <span class="string">buildVersion     :</span> <span class="string">"26.1.0"</span></span><br><span class="line"><span class="string">compileSdkVersion:</span> <span class="number">23</span>       ----&gt; <span class="string">compileSdkVersion:</span> <span class="number">26</span></span><br><span class="line"><span class="string">minSdkVersion    :</span> <span class="number">15</span>       ----&gt; <span class="string">minSdkVersion    :</span> <span class="number">15</span></span><br><span class="line"><span class="string">targetSdkVersion :</span> <span class="number">23</span>       ----&gt; <span class="string">targetSdkVersion :</span> <span class="number">26</span></span><br><span class="line"><span class="string">supportVersion   :</span> <span class="string">'23.2.1'</span> ----&gt; <span class="string">supportVersion   :</span> <span class="string">"26.1.0"</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><ul>
+<li>点击Install Build Tools 26.1.0 and sync project之后报错</li>
 </ul>
+<blockquote>
+<p>What went wrong:<br>A problem occurred configuring project ‘:tztCamera’.<br>Failed to find Build Tools revision 26.1.0</p>
+</blockquote>
+<p><img src="/images/targetsdkupdate/target_update_error.png" alt></p>
+<blockquote>
+<p>注释掉gradle里的buildToolsVersion config.buildVersion</p>
+</blockquote>
+<ul>
+<li><p>ERROR: All flavors must now belong to a named flavor dimension. Learn more at <a href="https://d.android.com/r/tools/flavorDimensions-missing-error-message.html" target="_blank" rel="noopener">https://d.android.com/r/tools/flavorDimensions-missing-error-message.html</a><br>Affected Modules: app</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在app.gradle里添加flavorDimensions <span class="string">"default"</span></span><br><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId config.applicationId</span><br><span class="line">        minSdkVersion config.minSdkVersion</span><br><span class="line">        targetSdkVersion config.targetSdkVersion</span><br><span class="line">        flavorDimensions <span class="string">"default"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>唤醒屏幕: adb shell input keyevent 26  (26电源键)(模拟按键)</li>
-<li>清除数据: adb shell pm clear 包名</li>
-<li>安装apk: adb install 包名 (强制安装 adb install -r 包名)</li>
-<li>查看当前栈顶的Activity: adb shell dumpsys activity | findStr “mFocusedActivity”</li>
-<li>查看当前Activity栈:adb shell dumpsys activity | findStr -i run <a id="more"></a></li>
-<li>查看当前包名的View结构:adb shell dumpsys activity 包名</li>
-<li>卸载apk: adb uninstall 包名</li>
-<li>截图: adb shell /system/bin/screencap -p /sdcard/shot.png</li>
-<li>从手机拿取文件: adb pull /sdcard/shot.png E:/study</li>
-<li>推送文件到手机: adb push E:/study/shot.png /sdcard/shot.png </li>
-</ol>
+<li><p>ERROR: Unable to resolve dependency for ‘:app@Default_ChannelUat/compileClasspath’: Could not resolve project :ChoosePDFActivity.<br>Show Details<br>Affected Modules: app</p>
+</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">因module:app中有三个不同的buildtype,所以在另外的module里也需要添加</span><br><span class="line"><span class="class">buildTypes </span>&#123;</span><br><span class="line">    <span class="class">debug </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class">uat </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class">release </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><ul>
+<li><p>主要是使用外部存储器存储, 比如资PDF的下载, APP升级文件的下载等这个适配主要使用FileProvider, 或者图方便使用，在Application中onCreate()方法中加入如下代码</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//VM会忽略文件URI曝光  解决升级N之后带来的问题 替换FileProvider</span><br><span class="line"><span class="symbol">if</span> (<span class="keyword">Build.VERSION.SDK_INT </span>&gt; <span class="keyword">Build.VERSION_CODES.N) </span>&#123;</span><br><span class="line">    <span class="keyword">StrictMode.VmPolicy.Builder </span><span class="keyword">builder </span>= new <span class="keyword">StrictMode.VmPolicy.Builder();</span></span><br><span class="line"><span class="keyword"> </span>   <span class="keyword">StrictMode.setVmPolicy(builder.build());</span></span><br><span class="line"><span class="keyword"> </span>   <span class="keyword">builder.detectFileUriExposure();</span></span><br><span class="line"><span class="keyword">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>错误: 程序包android.support.v4.animation不存在</p>
+</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">supportLib 26.0.0+以上AnimatorCompatHelper类被移除 </span><br><span class="line">AnimatorCompatHelper.<span class="keyword">clear</span>Interpolator<span class="params">(holder.itemView)</span>;</span><br><span class="line">需要替换为</span><br><span class="line">TimeInterpolator mDefaultInterpolator = new ValueAnimator<span class="params">()</span><span class="string">.getInterpolator</span><span class="params">()</span>;</span><br><span class="line">holder.itemView.animate<span class="params">()</span><span class="string">.setInterpolator</span><span class="params">(mDefaultInterpolator)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>getDeviceId()<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果是使用<span class="selector-tag">TelephonyManager</span><span class="selector-class">.getDeviceId</span>()建议改为获取<span class="selector-tag">AndroidId</span></span><br><span class="line"><span class="selector-tag">android</span><span class="selector-class">.provider</span><span class="selector-class">.Settings</span><span class="selector-class">.Secure</span><span class="selector-class">.getString</span>(<span class="selector-tag">Pub</span><span class="selector-class">.getApplication</span>()<span class="selector-class">.getContentResolver</span>(), <span class="selector-tag">android</span><span class="selector-class">.provider</span><span class="selector-class">.Settings</span><span class="selector-class">.Secure</span><span class="selector-class">.ANDROID_ID</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -524,7 +538,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag"># 工具</a>
+            <a href="/tags/记录/" rel="tag"># 记录</a>
           
         </div>
       
@@ -537,14 +551,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/31/dialog1/" rel="next" title="Dialog显示导致出现透明蒙层">
+                <i class="fa fa-chevron-left"></i> Dialog显示导致出现透明蒙层
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/13/note1/" rel="prev" title="用做记录">
-                用做记录 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/03/fby/" rel="prev" title="Mac-Android反编译">
+                Mac-Android反编译 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -593,8 +611,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -692,6 +719,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#情况"><span class="nav-number">1.</span> <span class="nav-text">情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到问题"><span class="nav-number">2.</span> <span class="nav-text">遇到问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改"><span class="nav-number">3.</span> <span class="nav-text">修改</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
