@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="xyuxiao">
 <meta property="og:description" content="正则匹配只存在数字 x.matches(“^\d+$”)  HttpClient关于SDK&amp;gt;23Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入123android &amp;#123;    useLibrary &apos;org.apache.http.legacy&apos;&amp;#125; Android8">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T08:06:17.796Z">
+<meta property="og:updated_time" content="2020-03-20T07:18:32.539Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用做记录">
 <meta name="twitter:description" content="正则匹配只存在数字 x.matches(“^\d+$”)  HttpClient关于SDK&amp;gt;23Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入123android &amp;#123;    useLibrary &apos;org.apache.http.legacy&apos;&amp;#125; Android8">
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-19 08:06:17" itemprop="dateModified" datetime="2019-08-19T08:06:17Z">2019-08-19</time>
+                <time title="修改时间：2020-03-20 07:18:32" itemprop="dateModified" datetime="2020-03-20T07:18:32Z">2020-03-20</time>
               
             
           </span>
@@ -496,6 +496,7 @@
 <h4 id="Android8出现app-is-in-background-uid-UidRecord"><a href="#Android8出现app-is-in-background-uid-UidRecord" class="headerlink" title="Android8出现app is in background uid UidRecord"></a>Android8出现app is in background uid UidRecord</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (<span class="keyword">Build.VERSION.SDK_INT </span>&gt;= <span class="keyword">Build.VERSION_CODES.O) </span>&#123;</span><br><span class="line">    <span class="built_in">context</span>.startForegroundService(m_msgIntent)<span class="comment">;</span></span><br><span class="line">&#125; else &#123;</span><br><span class="line">    <span class="built_in">context</span>.startService(m_msgIntent)<span class="comment">; //</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="Android9出现requires-android-permission-FOREGROUND-SERVICE"><a href="#Android9出现requires-android-permission-FOREGROUND-SERVICE" class="headerlink" title="Android9出现requires android.permission.FOREGROUND_SERVICE"></a>Android9出现requires android.permission.FOREGROUND_SERVICE</h4><p>java.lang.SecurityException: Permission Denial: startForeground from pid=9564, uid=12350 requires android.permission.FOREGROUND_SERVICE<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.FOREGROUND_SERVICE"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
+<h4 id="禁止录屏"><a href="#禁止录屏" class="headerlink" title="禁止录屏"></a>禁止录屏</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">getWindow</span>()<span class="selector-class">.addFlags</span>(<span class="selector-tag">WindowManager</span><span class="selector-class">.LayoutParams</span><span class="selector-class">.FLAG_SECURE</span>);</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -618,7 +619,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -710,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#正则匹配只存在数字"><span class="nav-number">1.</span> <span class="nav-text">正则匹配只存在数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpClient关于SDK-gt-23"><span class="nav-number">2.</span> <span class="nav-text">HttpClient关于SDK&gt;23</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android8出现app-is-in-background-uid-UidRecord"><span class="nav-number">3.</span> <span class="nav-text">Android8出现app is in background uid UidRecord</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android9出现requires-android-permission-FOREGROUND-SERVICE"><span class="nav-number">4.</span> <span class="nav-text">Android9出现requires android.permission.FOREGROUND_SERVICE</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#正则匹配只存在数字"><span class="nav-number">1.</span> <span class="nav-text">正则匹配只存在数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpClient关于SDK-gt-23"><span class="nav-number">2.</span> <span class="nav-text">HttpClient关于SDK&gt;23</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android8出现app-is-in-background-uid-UidRecord"><span class="nav-number">3.</span> <span class="nav-text">Android8出现app is in background uid UidRecord</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android9出现requires-android-permission-FOREGROUND-SERVICE"><span class="nav-number">4.</span> <span class="nav-text">Android9出现requires android.permission.FOREGROUND_SERVICE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#禁止录屏"><span class="nav-number">5.</span> <span class="nav-text">禁止录屏</span></a></li></ol></div>
             
 
           </div>
@@ -731,7 +732,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
