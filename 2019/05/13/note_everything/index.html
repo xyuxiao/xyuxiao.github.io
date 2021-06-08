@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="xyuxiao">
 <meta property="og:description" content="正则匹配只存在数字 x.matches(“^\d+$”)  excel宏计算123456789101112Sub 计算()&apos;&apos; 计算 Macro&apos;For ppp = 2 To 5000 Step 1    If Sheets(1).Cells(ppp, 1) &amp;lt;&amp;gt; &quot;&quot; Then        x = Sheets(1).Cells(ppp, 1)        y = Sheets(">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-06-08T03:14:25.078Z">
+<meta property="og:updated_time" content="2021-06-08T11:12:18.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用做记录">
 <meta name="twitter:description" content="正则匹配只存在数字 x.matches(“^\d+$”)  excel宏计算123456789101112Sub 计算()&apos;&apos; 计算 Macro&apos;For ppp = 2 To 5000 Step 1    If Sheets(1).Cells(ppp, 1) &amp;lt;&amp;gt; &quot;&quot; Then        x = Sheets(1).Cells(ppp, 1)        y = Sheets(">
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-06-08 03:14:25" itemprop="dateModified" datetime="2021-06-08T03:14:25Z">2021-06-08</time>
+                <time title="修改时间：2021-06-08 11:12:18" itemprop="dateModified" datetime="2021-06-08T11:12:18Z">2021-06-08</time>
               
             
           </span>
@@ -470,6 +470,54 @@
 </blockquote>
 <h4 id="excel宏计算"><a href="#excel宏计算" class="headerlink" title="excel宏计算"></a>excel宏计算</h4><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 计算()</span><br><span class="line"><span class="comment">'</span></span><br><span class="line"><span class="comment">' 计算 Macro</span></span><br><span class="line"><span class="comment">'</span></span><br><span class="line"><span class="keyword">For</span> ppp = <span class="number">2</span> <span class="keyword">To</span> <span class="number">5000</span> <span class="keyword">Step</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">If</span> Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">1</span>) &lt;&gt; <span class="string">""</span> <span class="keyword">Then</span></span><br><span class="line">        x = Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">1</span>)</span><br><span class="line">        y = Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">2</span>)</span><br><span class="line">        Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">3</span>) = x + y</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span> ppp</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
+<h4 id="安装低版本node"><a href="#安装低版本node" class="headerlink" title="安装低版本node"></a>安装低版本node</h4><ol>
+<li>安装nvm <blockquote>
+<p>brew install nvm</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><p>报错信息</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">Error</span>: </span><br><span class="line">  homebrew-core <span class="keyword">is</span> a shallow clone.</span><br><span class="line">  homebrew-cask <span class="keyword">is</span> a shallow clone.</span><br><span class="line"><span class="keyword">To</span> `brew update`, first run:</span><br><span class="line">  git -C /usr/local/Homebrew/<span class="keyword">Library</span>/Taps/homebrew/homebrew-core fetch <span class="comment">--unshallow</span></span><br><span class="line">  git -C /usr/local/Homebrew/<span class="keyword">Library</span>/Taps/homebrew/homebrew-cask fetch <span class="comment">--unshallow</span></span><br><span class="line">These commands may take a few minutes <span class="keyword">to</span> run due <span class="keyword">to</span> the large size <span class="keyword">of</span> the repositories.</span><br><span class="line">This restriction has been made <span class="keyword">on</span> GitHub<span class="symbol">'s</span> request because updating shallow</span><br><span class="line">clones <span class="keyword">is</span> an extremely expensive operation due <span class="keyword">to</span> the tree layout <span class="keyword">and</span> traffic <span class="keyword">of</span></span><br><span class="line">Homebrew/homebrew-core <span class="keyword">and</span> Homebrew/homebrew-cask. We don<span class="symbol">'t</span> do this <span class="keyword">for</span> you</span><br><span class="line">automatically <span class="keyword">to</span> avoid repeatedly performing an expensive unshallow operation <span class="keyword">in</span></span><br><span class="line">CI systems (which should instead be fixed <span class="keyword">to</span> <span class="keyword">not</span> <span class="keyword">use</span> shallow clones). Sorry <span class="keyword">for</span></span><br><span class="line">the inconvenience!</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方法</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> /usr/<span class="keyword">local</span>/Homebrew/Library/Taps/homebrew</span><br><span class="line"><span class="keyword">rm</span> -rf homebrew-core</span><br><span class="line"><span class="keyword">rm</span> -rf homebrew-cask</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="2">
+<li><p>更新brew</p>
+<blockquote>
+<p>brew upgrade</p>
+</blockquote>
+</li>
+<li><p>安装nvm</p>
+<blockquote>
+<p>brew install nvm </p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">Updating Homebrew...</span><br><span class="line">==&gt; Downloading https:<span class="comment">//ghcr.io/v2/homebrew/core/nvm/manifests/0.38.0</span></span><br><span class="line">######################################################################## <span class="number">100.0</span>%</span><br><span class="line">==&gt; Downloading https:<span class="comment">//ghcr.io/v2/homebrew/core/nvm/blobs/sha256:f3cd481b024f9e</span></span><br><span class="line">==&gt; Downloading <span class="keyword">from</span> https:<span class="comment">//pkg-containers.githubusercontent.com/ghcr1/blobs/sh</span></span><br><span class="line">######################################################################## <span class="number">100.0</span>%</span><br><span class="line">==&gt; Pouring nvm-<span class="number">-0.38</span><span class="number">.0</span>.all.bottle.tar.gz</span><br><span class="line">==&gt; Caveats</span><br><span class="line">Please note that upstream has asked us to make explicit managing</span><br><span class="line">nvm via Homebrew is unsupported by them and you should check any</span><br><span class="line">problems against the standard nvm install method prior to reporting.</span><br><span class="line"></span><br><span class="line">You should create NVM<span class="string">'s working directory if it doesn'</span>t exist:</span><br><span class="line"></span><br><span class="line">  mkdir ~/.nvm</span><br><span class="line"></span><br><span class="line">Add the following to /Users/xyuxiao/.bash_profile or your desired shell</span><br><span class="line">configuration file:</span><br><span class="line"></span><br><span class="line">  <span class="keyword">export</span> NVM_DIR=<span class="string">"$HOME/.nvm"</span></span><br><span class="line">  [ -s <span class="string">"/usr/local/opt/nvm/nvm.sh"</span> ] &amp;&amp; . <span class="string">"/usr/local/opt/nvm/nvm.sh"</span>  # This loads nvm</span><br><span class="line">  [ -s <span class="string">"/usr/local/opt/nvm/etc/bash_completion.d/nvm"</span> ] &amp;&amp; . <span class="string">"/usr/local/opt/nvm/etc/bash_completion.d/nvm"</span>  # This loads nvm bash_completion</span><br><span class="line"></span><br><span class="line">You can set $NVM_DIR to any location, but leaving it unchanged <span class="keyword">from</span></span><br><span class="line">/usr/local/opt/nvm will destroy any nvm-installed Node installations</span><br><span class="line">upon upgrade/reinstall.</span><br><span class="line"></span><br><span class="line">Type `nvm help` for further information.</span><br><span class="line"></span><br><span class="line">Bash completion has been installed to:</span><br><span class="line">  /usr/local/etc/bash_completion.d</span><br><span class="line">==&gt; Summary</span><br><span class="line">🍺  /usr/local/Cellar/nvm/<span class="number">0.38</span><span class="number">.0</span>: <span class="number">7</span> files, <span class="number">176</span>KB</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>根据提示信息修改</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~<span class="string">/.nvm</span></span><br><span class="line">open <span class="string">/Users/xyuxiao/.bash_profile</span></span><br><span class="line"></span><br><span class="line">把提示内容放进<span class="string">.bash_profile</span></span><br><span class="line">export NVM_DIR=<span class="string">"$HOME/.nvm"</span></span><br><span class="line">[ -s <span class="string">"/usr/local/opt/nvm/nvm.sh"</span> ] &amp;&amp; . <span class="string">"/usr/local/opt/nvm/nvm.sh"</span>  <span class="comment"># This loads nvm</span></span><br><span class="line">[ -s <span class="string">"/usr/local/opt/nvm/etc/bash_completion.d/nvm"</span> ] &amp;&amp; . <span class="string">"/usr/local/opt/nvm/etc/bash_completion.d/nvm"</span>  <span class="comment"># This loads nvm bash_completion</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询node版本</p>
+<blockquote>
+<p>nvm ls-remote</p>
+</blockquote>
+</li>
+<li><p>挑选版本安装</p>
+<blockquote>
+<p>nvm install v12.22.0</p>
+</blockquote>
+</li>
+<li><p>查看当前版本</p>
+<blockquote>
+<p>mvn current</p>
+</blockquote>
+</li>
+</ol>
+
       
     </div>
 
@@ -686,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#正则匹配只存在数字"><span class="nav-number">1.</span> <span class="nav-text">正则匹配只存在数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#excel宏计算"><span class="nav-number">2.</span> <span class="nav-text">excel宏计算</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#正则匹配只存在数字"><span class="nav-number">1.</span> <span class="nav-text">正则匹配只存在数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#excel宏计算"><span class="nav-number">2.</span> <span class="nav-text">excel宏计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装低版本node"><span class="nav-number">3.</span> <span class="nav-text">安装低版本node</span></a></li></ol></div>
             
 
           </div>
