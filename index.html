@@ -342,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/10/kotlin/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/08/harmonyOS_study/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -362,7 +362,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/03/10/kotlin/" class="post-title-link" itemprop="url">kotlin记录</a>
+                <a href="/2021/06/08/harmonyOS_study/" class="post-title-link" itemprop="url">鸿蒙学习</a>
               
             
           </h1>
@@ -388,24 +388,12 @@
                 
               
 
-              <time title="创建时间：2020-03-10 10:51:23" itemprop="dateCreated datePublished" datetime="2020-03-10T10:51:23Z">2020-03-10</time>
+              <time title="创建时间：2021-06-08 10:02:25 / 修改时间：03:17:19" itemprop="dateCreated datePublished" datetime="2021-06-08T10:02:25Z">2021-06-08</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-04-29 08:27:01" itemprop="dateModified" datetime="2020-04-29T08:27:01Z">2020-04-29</time>
               
             
           </span>
@@ -422,7 +410,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/HarmonyOS/" itemprop="url" rel="index"><span itemprop="name">HarmonyOS</span></a></span>
 
                 
                 
@@ -458,13 +446,18 @@
 
       
         
+          <p>### </p>
+<ol>
+<li></li></ol>
+          <!--noindex-->
           
-            <ol>
-<li>OnClickListener中用this需要this@MainActivity才是MainActivity的this</li>
-<li>class传递可以传 类名::class.java</li>
-</ol>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2021/06/08/harmonyOS_study/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -521,7 +514,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/anr/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/26/android_drozer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -541,7 +534,582 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/12/10/anr/" class="post-title-link" itemprop="url">安卓anr</a>
+                <a href="/2021/05/26/android_drozer/" class="post-title-link" itemprop="url">drozer</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-05-26 15:18:20" itemprop="dateCreated datePublished" datetime="2021-05-26T15:18:20Z">2021-05-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:09:19" itemprop="dateModified" datetime="2021-06-08T03:09:19Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h3><ol>
+<li>下载选择drozer(Python.whl):<a href="https://labs.f-secure.com/tools/drozer/" target="_blank" rel="noopener">https://labs.f-secure.com/tools/drozer/</a></li>
+<li>安装drozer</li>
+</ol>
+<ul>
+<li>安装<blockquote>
+<p>sudo pip install drozer-2.4.4-py2-none-any.whl</p>
+</blockquote>
+</li>
+<li>安装完成, 需要twisted插件<blockquote>
+<p>sudo pip install twisted</p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li>下载选择drozer (Agent .apk only)并给手机安装</li>
+<li>使用drozer命令<ul>
+<li>端口转发<blockquote>
+<p>adb forward tcp:31415 tcp:31415</p>
+</blockquote>
+</li>
+<li>连接控制台<blockquote>
+<p>drozer console connect</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2021/05/26/android_drozer/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/05/android_flutter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/02/05/android_flutter/" class="post-title-link" itemprop="url">flutter记录</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-02-05 10:19:20" itemprop="dateCreated datePublished" datetime="2021-02-05T10:19:20Z">2021-02-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:09:56" itemprop="dateModified" datetime="2021-06-08T03:09:56Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><h4 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h4><h5 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AndroidStudio升级到<span class="number">4.1</span>后, 显示未找到Flutter和Dart插件的问题</span><br><span class="line">因为AndroidStudio4.<span class="number">1</span>的插件位置变了, 用flutter doctor这个命令去检测时, 还是会去原来的位置查找这两个插件, 所以无法找到插件。</span><br><span class="line"></span><br><span class="line">ln -s ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Google/</span>AndroidStudio4.<span class="number">1</span><span class="regexp">/plugins ~/</span>Library<span class="regexp">/Application\ Support/</span>AndroidStudio4.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2021/02/05/android_flutter/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/10/android_kotlin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/03/10/android_kotlin/" class="post-title-link" itemprop="url">kotlin记录</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-10 10:51:23" itemprop="dateCreated datePublished" datetime="2020-03-10T10:51:23Z">2020-03-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:11:20" itemprop="dateModified" datetime="2021-06-08T03:11:20Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>可变变量定义<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var <span class="tag">&lt;<span class="name">标识符</span>&gt;</span>: <span class="tag">&lt;<span class="name">类型</span>&gt;</span> = <span class="tag">&lt;<span class="name">初始化值</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>不可变变量定义,只能赋值一次类似final<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val <span class="tag">&lt;<span class="name">标识符</span>&gt;</span>: <span class="tag">&lt;<span class="name">类型</span>&gt;</span> = <span class="tag">&lt;<span class="name">初始化值</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>常量和变量都可以在定义的时候不初始化, 但是在使用之前一定要初始化<br>编译器支持自动类型判断<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> a: <span class="built_in">Int</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">val</span> b = <span class="number">1</span>       <span class="comment">// 系统自动推断变量类型为Int</span></span><br><span class="line"><span class="keyword">val</span> c: <span class="built_in">Int</span>      <span class="comment">// 如果不在声明时初始化则必须提供变量类型</span></span><br><span class="line">c = <span class="number">1</span>           <span class="comment">// 明确赋值</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">5</span>       <span class="comment">// 系统自动推断变量类型为Int</span></span><br><span class="line">x += <span class="number">1</span>          <span class="comment">// 变量可修改</span></span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/03/10/android_kotlin/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/android_anr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/10/android_anr/" class="post-title-link" itemprop="url">安卓anr</a>
               
             
           </h1>
@@ -584,7 +1152,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-04-29 08:26:46" itemprop="dateModified" datetime="2020-04-29T08:26:46Z">2020-04-29</time>
+                <time title="修改时间：2021-06-08 03:08:55" itemprop="dateModified" datetime="2021-06-08T03:08:55Z">2021-06-08</time>
               
             
           </span>
@@ -649,11 +1217,11 @@
 </li>
 <li>通过浏览器打开/bugreport_out/index.html</li>
 </ol>
-<h2 id="使用Battery-Historian工具分析Android"><a href="#使用Battery-Historian工具分析Android" class="headerlink" title="使用Battery Historian工具分析Android"></a>使用Battery Historian工具分析Android</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><p><a href="https://hub.docker.com/" target="_blank" rel="noopener">点击下载</a></p>
+<h2 id="使用Battery-Historian工具分析Android"><a href="#使用Battery-Historian工具分析Android" class="headerlink" title="使用Battery Historian工具分析Android"></a>使用Battery Historian工具分析Android</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><p><a href="https://hub.docker.com/" target="_blank" rel="noopener">点击下载</a><br></p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/10/anr/#more" rel="contents">
+              <a class="btn" href="/2019/12/10/android_anr/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -715,7 +1283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/fby/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/android_fby/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -735,7 +1303,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/09/03/fby/" class="post-title-link" itemprop="url">Mac-Android反编译</a>
+                <a href="/2019/09/03/android_fby/" class="post-title-link" itemprop="url">Mac-Android反编译</a>
               
             
           </h1>
@@ -761,12 +1329,24 @@
                 
               
 
-              <time title="创建时间：2019-09-03 15:40:00 / 修改时间：07:56:01" itemprop="dateCreated datePublished" datetime="2019-09-03T15:40:00Z">2019-09-03</time>
+              <time title="创建时间：2019-09-03 15:40:00" itemprop="dateCreated datePublished" datetime="2019-09-03T15:40:00Z">2019-09-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:09:24" itemprop="dateModified" datetime="2021-06-08T03:09:24Z">2021-06-08</time>
               
             
           </span>
@@ -828,7 +1408,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/09/03/fby/#more" rel="contents">
+              <a class="btn" href="/2019/09/03/android_fby/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -890,7 +1470,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/targetsdkupdate/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/android_targetsdkupdate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -910,7 +1490,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/29/targetsdkupdate/" class="post-title-link" itemprop="url">升级targetsdk到26</a>
+                <a href="/2019/08/29/android_targetsdkupdate/" class="post-title-link" itemprop="url">升级targetsdk到26</a>
               
             
           </h1>
@@ -953,7 +1533,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-03 07:54:49" itemprop="dateModified" datetime="2019-09-03T07:54:49Z">2019-09-03</time>
+                <time title="修改时间：2021-06-08 03:13:35" itemprop="dateModified" datetime="2021-06-08T03:13:35Z">2021-06-08</time>
               
             
           </span>
@@ -1010,7 +1590,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/29/targetsdkupdate/#more" rel="contents">
+              <a class="btn" href="/2019/08/29/android_targetsdkupdate/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1072,7 +1652,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/dialog1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/android_dialog1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -1092,7 +1672,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/31/dialog1/" class="post-title-link" itemprop="url">Dialog显示导致出现透明蒙层</a>
+                <a href="/2019/07/31/android_dialog1/" class="post-title-link" itemprop="url">Dialog显示导致出现透明蒙层</a>
               
             
           </h1>
@@ -1135,7 +1715,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-19 07:36:40" itemprop="dateModified" datetime="2019-08-19T07:36:40Z">2019-08-19</time>
+                <time title="修改时间：2021-06-08 03:09:10" itemprop="dateModified" datetime="2021-06-08T03:09:10Z">2021-06-08</time>
               
             
           </span>
@@ -1192,7 +1772,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/31/dialog1/#more" rel="contents">
+              <a class="btn" href="/2019/07/31/android_dialog1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1300,12 +1880,24 @@
                 
               
 
-              <time title="创建时间：2019-07-23 21:05:02 / 修改时间：13:23:06" itemprop="dateCreated datePublished" datetime="2019-07-23T21:05:02Z">2019-07-23</time>
+              <time title="创建时间：2019-07-23 21:05:02" itemprop="dateCreated datePublished" datetime="2019-07-23T21:05:02Z">2019-07-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:10:11" itemprop="dateModified" datetime="2021-06-08T03:10:11Z">2021-06-08</time>
               
             
           </span>
@@ -1424,7 +2016,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/git/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/git_study/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -1444,7 +2036,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/09/git/" class="post-title-link" itemprop="url">git</a>
+                <a href="/2019/07/09/git_study/" class="post-title-link" itemprop="url">git</a>
               
             
           </h1>
@@ -1487,7 +2079,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-15 05:23:52" itemprop="dateModified" datetime="2019-07-15T05:23:52Z">2019-07-15</time>
+                <time title="修改时间：2021-06-08 03:14:04" itemprop="dateModified" datetime="2021-06-08T03:14:04Z">2021-06-08</time>
               
             
           </span>
@@ -1552,563 +2144,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/09/git/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/okhttp2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xyuxiao">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xyuxiao">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/20/okhttp2/" class="post-title-link" itemprop="url">OkHttp源码阅读-拦截器</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-19 21:38:27" itemprop="dateCreated datePublished" datetime="2019-06-19T21:38:27Z">2019-06-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-08 05:36:00" itemprop="dateModified" datetime="2019-07-08T05:36:00Z">2019-07-08</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><p>不管是同步还是异步任务最后都会走到getResponseWithInterceptorChain方法中,在这个方法里会创建一个List用于存放一系列的拦截器,包括OkHttp官方定义的,也包括自定义的拦截器,这方法会递归执行所有拦截器在最后CallServerInterceptor中进行数据请求<br></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/20/okhttp2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/okhttp1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xyuxiao">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xyuxiao">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/18/okhttp1/" class="post-title-link" itemprop="url">OkHttp源码阅读</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-17 16:16:23" itemprop="dateCreated datePublished" datetime="2019-06-17T16:16:23Z">2019-06-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-03 08:24:55" itemprop="dateModified" datetime="2019-07-03T08:24:55Z">2019-07-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val<span class="built_in"> client </span>= OkHttpClient()</span><br><span class="line">val<span class="built_in"> client </span>= OkHttpClient().newBuilder().build()</span><br></pre></td></tr></table></figure>
-<p>在进行请求之前需要先new一个OkHttpClient,OkHttpClient内部是用的构建者模式初始化基础配置<br></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/18/okhttp1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/03/cocos1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xyuxiao">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xyuxiao">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/03/cocos1/" class="post-title-link" itemprop="url">cocos2dx-学习日记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-02 23:24:06" itemprop="dateCreated datePublished" datetime="2019-06-02T23:24:06Z">2019-06-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-03 08:24:55" itemprop="dateModified" datetime="2019-07-03T08:24:55Z">2019-07-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Cocos/" itemprop="url" rel="index"><span itemprop="name">Cocos</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><p>根据官方GitHub(<a href="https://github.com/cocos2d/cocos2d-x)进行配置,当执行新建项目的时候遇到" target="_blank" rel="noopener">https://github.com/cocos2d/cocos2d-x)进行配置,当执行新建项目的时候遇到</a></p>
-<blockquote>
-<p>cocos new MyGame -p com.xyuxiao.mygame -l cpp -d ../Project/</p>
-</blockquote>
-<ul>
-<li>-p 包名 -l 语言版本 -d 项目路径 </li>
-</ul>
-<blockquote>
-<p>-bash: cocos: command not found<br>//把配进环境变量就行了<br>open ~/.bash_profile<br>export PATH=/Users/xyuxiao/Documents/study/cocos/cocos2d-x/tools/cocos2d-console/bin:$PATH<br>source ~/.bash_profile</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/03/cocos1/#more" rel="contents">
+              <a class="btn" href="/2019/07/09/git_study/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2158,7 +2194,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2202,7 +2238,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2229,7 +2265,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2254,9 +2294,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2298,7 +2336,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

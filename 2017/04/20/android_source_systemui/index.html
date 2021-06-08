@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="显示SystemUI frameworks/base/services/java/com/android/server下的SystemServer.java的12345try &amp;#123;    startSystemUi(context);&amp;#125; catch (Throwable e) &amp;#123;        reportWtf(&quot;starting System UI&quot;, e);&amp;#1">
+<meta name="keywords" content="记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android-SystemUI">
+<meta property="og:url" content="http://yoursite.com/2017/04/20/android_source_systemui/index.html">
+<meta property="og:site_name" content="xyuxiao">
+<meta property="og:description" content="显示SystemUI frameworks/base/services/java/com/android/server下的SystemServer.java的12345try &amp;#123;    startSystemUi(context);&amp;#125; catch (Throwable e) &amp;#123;        reportWtf(&quot;starting System UI&quot;, e);&amp;#1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-06-08T03:08:26.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android-SystemUI">
+<meta name="twitter:description" content="显示SystemUI frameworks/base/services/java/com/android/server下的SystemServer.java的12345try &amp;#123;    startSystemUi(context);&amp;#125; catch (Throwable e) &amp;#123;        reportWtf(&quot;starting System UI&quot;, e);&amp;#1">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2017/04/20/android_source_systemui/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android-SystemUI | xyuxiao</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xyuxiao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">如梦一场</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/20/android_source_systemui/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android-SystemUI
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-04-20 09:21:30" itemprop="dateCreated datePublished" datetime="2017-04-20T09:21:30Z">2017-04-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:08:26" itemprop="dateModified" datetime="2021-06-08T03:08:26Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="显示SystemUI"><a href="#显示SystemUI" class="headerlink" title="显示SystemUI"></a>显示SystemUI</h3><ul>
+<li>frameworks/base/services/java/com/android/server下的SystemServer.java的<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">try</span> &#123;</span><br><span class="line">    <span class="selector-tag">startSystemUi</span>(context);</span><br><span class="line">&#125; <span class="selector-tag">catch</span> (Throwable e) &#123;</span><br><span class="line">        <span class="selector-tag">reportWtf</span>(<span class="string">"starting System UI"</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><a href="http://blog.csdn.net/zwlove5280/article/details/48349331" target="_blank" rel="noopener">http://blog.csdn.net/zwlove5280/article/details/48349331</a><br><a id="more"></a></p>
+</blockquote>
+<h3 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h3><ul>
+<li><p>SystemUI属于系统apk</p>
+<p>  android: sharedUserId=”android.uid.systemui”</p>
+</li>
+<li><p>SystemUI属于核心apk</p>
+<p>  coreApp=”true”</p>
+</li>
+<li><p>SystemUI不会被KILL，即被KILL后会自动重启,主要指不被low memory killer杀掉</p>
+<p>  android:persistent=”true”</p>
+</li>
+<li><p>进程名为com.android.systemui</p>
+<p>  android:process=”com.android.systemui”</p>
+</li>
+</ul>
+<h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><ol>
+<li><p>frameworks/basr/services/java/com/android/server/SystemServer</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SystemUI运行在ActivityManagerService Thread</span></span><br><span class="line">mActivityManagerService.systemReady(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Trace.traceBegin(Trace.TRACE_TAG_SYSTEM_SERVER, <span class="string">"StartSystemUI"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            startSystemUi(context);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            reportWtf(<span class="string">"starting System UI"</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">        Trace.traceEnd(Trace.TRACE_TAG_SYSTEM_SERVER);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//通过startServiceAsUser启动SystemUIService</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="function"><span class="keyword">void</span> <span class="title">startSystemUi</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">    intent.setComponent(<span class="keyword">new</span> ComponentName(<span class="string">"com.android.systemui"</span>,</span><br><span class="line">            <span class="string">"com.android.systemui.SystemUIService"</span>));</span><br><span class="line">    intent.addFlags(Intent.FLAG_DEBUG_TRIAGED_MISSING);</span><br><span class="line">    <span class="comment">//Slog.d(TAG, "Starting service: " + intent);</span></span><br><span class="line">    context.startServiceAsUser(intent, UserHandle.SYSTEM);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>frameworks/base/packages/SystemUI/src/com/android/systemui/SystemService</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">    ((SystemUIApplication) getApplication()).startServicesIfNeeded();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>frameworks/base/packages/SystemUI/src/com/android/systemui/SystemUIApplication</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在onCreate中注册监听开机广播</span></span><br><span class="line">@Override</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> onCreate() &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">    <span class="comment">// Set the application theme that is inherited by all services. Note that setting the</span></span><br><span class="line">    <span class="comment">// application theme in the manifest does only work for activities. Keep this in sync with</span></span><br><span class="line">    <span class="comment">// the theme set there.</span></span><br><span class="line">    setTheme(R.style.systemui_theme);</span><br><span class="line">    SystemUIFactory.createFromConfig(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">if</span> (Process.myUserHandle().equals(UserHandle.SYSTEM)) &#123;</span><br><span class="line">        IntentFilter filter = <span class="keyword">new</span> IntentFilter(Intent.ACTION_BOOT_COMPLETED);</span><br><span class="line">        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);</span><br><span class="line">        registerReceiver(<span class="keyword">new</span> BroadcastReceiver() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> onReceive(Context context, Intent intent) &#123;</span><br><span class="line">                <span class="keyword">if</span> (mBootCompleted) <span class="keyword">return</span>;</span><br><span class="line">                <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"BOOT_COMPLETED received"</span>);</span><br><span class="line">                unregisterReceiver(<span class="keyword">this</span>);</span><br><span class="line">                mBootCompleted = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">if</span> (mServicesStarted) &#123;</span><br><span class="line">                    <span class="keyword">final</span> <span class="keyword">int</span> N = mServices.length;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">                        mServices[i].onBootCompleted();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, filter);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// We don't need to startServices for sub-process that is doing some tasks.</span></span><br><span class="line">        <span class="comment">// (screenshots, sweetsweetdesserts or tuner ..)</span></span><br><span class="line">        String processName = ActivityThread.currentProcessName();</span><br><span class="line">        ApplicationInfo info = getApplicationInfo();</span><br><span class="line">        <span class="keyword">if</span> (processName != <span class="keyword">null</span> &amp;&amp; processName.startsWith(info.processName + <span class="string">":"</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// For a secondary user, boot-completed will never be called because it has already</span></span><br><span class="line">        <span class="comment">// been broadcasted on startup for the primary SystemUI process.  Instead, for</span></span><br><span class="line">        <span class="comment">// components which require the SystemUI component to be initialized per-user, we</span></span><br><span class="line">        <span class="comment">// start those components now for the current non-system user.</span></span><br><span class="line">        startServicesIfNeeded(SERVICES_PER_USER);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The classes of the stuff to start.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//SERVICES里面的类继承自SystemUI，SystemUI是一个抽象类</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">Class</span>&lt;?&gt;[] SERVICES = <span class="keyword">new</span> <span class="keyword">Class</span>[] &#123;</span><br><span class="line">    com.android.systemui.tuner.TunerService.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.keyguard.KeyguardViewMediator.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.recents.Recents.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.volume.VolumeUI.<span class="keyword">class</span>,</span><br><span class="line">    Divider.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.statusbar.SystemBars.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.usb.StorageNotification.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.<span class="keyword">power</span>.PowerUI.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.media.RingtonePlayer.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.keyboard.KeyboardUI.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.tv.pip.PipUI.<span class="keyword">class</span>,</span><br><span class="line">    com.android.systemui.shortcut.ShortcutKeyDispatcher.<span class="keyword">class</span></span><br><span class="line">&#125;;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Makes sure that all the SystemUI services are running. If they are already running, this is a</span></span><br><span class="line"><span class="comment"> * no-op. This is needed to conditinally start all the services, as we only need to have it in</span></span><br><span class="line"><span class="comment"> * the main process.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;This method must only be called from the main thread.&lt;/p&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> startServicesIfNeeded() &#123;</span><br><span class="line">    startServicesIfNeeded(SERVICES);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> startServicesIfNeeded(<span class="keyword">Class</span>&lt;?&gt;[] services) &#123;</span><br><span class="line">    <span class="keyword">if</span> (mServicesStarted) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!mBootCompleted) &#123;</span><br><span class="line">        <span class="comment">// check to see if maybe it was already completed long before we began</span></span><br><span class="line">        <span class="comment">// see ActivityManagerService.finishBooting()</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"1"</span>.equals(SystemProperties.get(<span class="string">"sys.boot_completed"</span>))) &#123;</span><br><span class="line">            mBootCompleted = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"BOOT_COMPLETED was already sent"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Log.v(TAG, <span class="string">"Starting SystemUI services for user "</span> +</span><br><span class="line">            Process.myUserHandle().getIdentifier() + <span class="string">"."</span>);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> N = services.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        <span class="keyword">Class</span>&lt;?&gt; cl = services[i];</span><br><span class="line">        <span class="keyword">if</span> (DEBUG) Log.d(TAG, <span class="string">"loading: "</span> + cl);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Object newService = SystemUIFactory.getInstance().createInstance(cl);</span><br><span class="line">            mServices[i] = (SystemUI) ((newService == <span class="keyword">null</span>) ? cl.newInstance() : newService);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException ex) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(ex);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InstantiationException ex) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(ex);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mServices[i].mContext = <span class="keyword">this</span>;</span><br><span class="line">        mServices[i].mComponents = mComponents;</span><br><span class="line">        <span class="keyword">if</span> (DEBUG) Log.d(TAG, <span class="string">"running: "</span> + mServices[i]);</span><br><span class="line">        mServices[i].start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (mBootCompleted) &#123;</span><br><span class="line">            mServices[i].onBootCompleted();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    mServicesStarted = <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3 id="StatusBar-状态栏"><a href="#StatusBar-状态栏" class="headerlink" title="StatusBar(状态栏)"></a>StatusBar(状态栏)</h3><h4 id="去掉StatusBar"><a href="#去掉StatusBar" class="headerlink" title="去掉StatusBar"></a>去掉StatusBar</h4><p>修改frameworks/base/pakages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">createAndAddWindows</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    addStatusBarWindow();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">addStatusBarWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    makeStatusBarView();</span><br><span class="line">    <span class="comment">//使StatusBar隐藏</span></span><br><span class="line">    mStatusBarWindow.setVisibility(View.GONE);</span><br><span class="line">    </span><br><span class="line">    mStatusBarWindowManager = <span class="keyword">new</span> StatusBarWindowManager(mContext);</span><br><span class="line">    mRemoteInputController = <span class="keyword">new</span> RemoteInputController(mStatusBarWindowManager,</span><br><span class="line">            mHeadsUpManager);</span><br><span class="line">    mStatusBarWindowManager.add(mStatusBarWindow, getStatusBarHeight());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果只是修改了隐藏StatusBar会导致StatusBar隐藏掉了但是还是会有一条黑边</p>
+<p>修改frameworks/base/core/res/res/values/dimens<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Height of the status bar --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dimen</span> <span class="attr">name</span>=<span class="string">"status_bar_height"</span>&gt;</span>25dp<span class="tag">&lt;/<span class="name">dimen</span>&gt;</span></span><br><span class="line">修改为</span><br><span class="line"><span class="tag">&lt;<span class="name">dimen</span> <span class="attr">name</span>=<span class="string">"status_bar_height"</span>&gt;</span>0dp<span class="tag">&lt;/<span class="name">dimen</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="状态栏图标-StatusBarIconController-java"><a href="#状态栏图标-StatusBarIconController-java" class="headerlink" title="状态栏图标(StatusBarIconController.java)"></a>状态栏图标(StatusBarIconController.java)</h4><blockquote>
+<p>framework/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarIconController<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public StatusBarIconController(Context context, View statusBar, View keyguardStatusBar,</span><br><span class="line">        PhoneStatusBar phoneStatusBar) &#123;</span><br><span class="line">    mContext = context;</span><br><span class="line">    mPhoneStatusBar = phoneStatusBar;</span><br><span class="line">   </span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/status_bar.xml</span><br><span class="line">    mSystemIconArea = (LinearLayout) statusBar.findViewById(R.id.system_icon_area);</span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/system_icons.xml</span><br><span class="line">    mStatusIcons = (LinearLayout) statusBar.findViewById(R.id.statusIcons);</span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/signal_cluster_view.xml</span><br><span class="line">    mSignalCluster = (SignalClusterView) statusBar.findViewById(R.id.signal_cluster);</span><br><span class="line">  </span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/notification_icon_area.xml</span><br><span class="line">    mNotificationIconAreaController = SystemUIFactory.getInstance()</span><br><span class="line">            .createNotificationIconAreaController(context, phoneStatusBar);</span><br><span class="line">    mNotificationIconAreaInner =</span><br><span class="line">            mNotificationIconAreaController.getNotificationInnerAreaView();</span><br><span class="line"></span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/status_bar.xml</span><br><span class="line">    ViewGroup notificationIconArea =</span><br><span class="line">            (ViewGroup) statusBar.findViewById(R.id.notification_icon_area);</span><br><span class="line">    notificationIconArea.addView(mNotificationIconAreaInner);</span><br><span class="line"></span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/keyguard_status_bar.xml/system_icons</span><br><span class="line">    mStatusIconsKeyguard = (LinearLayout) keyguardStatusBar.findViewById(R.id.statusIcons);</span><br><span class="line"></span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/status_bar.xml</span><br><span class="line">    mBatteryMeterView = (BatteryMeterView) statusBar.findViewById(R.id.battery);</span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/keyguard_status_bar.xml/system_icons</span><br><span class="line">    mBatteryMeterViewKeyguard = (BatteryMeterView) keyguardStatusBar.findViewById(R.id.battery);</span><br><span class="line">    scaleBatteryMeterViews(context);</span><br><span class="line"></span><br><span class="line">    /<span class="regexp">/framework/base</span><span class="regexp">/packages/</span>SystemUI/res/layout/status_bar.xml</span><br><span class="line">    mClock = (TextView) statusBar.findViewById(R.id.clock);</span><br><span class="line">    mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);</span><br><span class="line">    mLightModeIconColorSingleTone = context.getColor(R.color.light_mode_icon_color_single_tone);</span><br><span class="line">    mHandler = new Handler();</span><br><span class="line">    defineSlots();</span><br><span class="line">    loadDimens();</span><br><span class="line"></span><br><span class="line">    TunerService.get(mContext).addTunable(this, ICON_BLACKLIST);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>statusBar由来:framework/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar–&gt;createAndAddWindows()–&gt;makeStatusBarView()–&gt;createIconController()<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">createIconController</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mIconController = <span class="keyword">new</span> StatusBarIconController(</span><br><span class="line">            mContext, mStatusBarView, mKeyguardStatusBar, <span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//super_status_bar/status_bar</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function">PhoneStatusBarView <span class="title">makeStatusBarView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    mStatusBarView = (PhoneStatusBarView) mStatusBarWindow.findViewById(R.id.status_bar);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">inflateStatusBarWindow</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    mStatusBarWindow = (StatusBarWindowView) View.inflate(context,</span><br><span class="line">            R.layout.super_status_bar, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>keyguardStatusBar由来:framework/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar–&gt;createAndAddWindows()–&gt;makeStatusBarView()<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//status_bar_expanded/keyguard_status_bar</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> PhoneStatusBarView <span class="title">makeStatusBarView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    mKeyguardStatusBar = (KeyguardStatusBarView) mStatusBarWindow.findViewById(R.id.keyguard_header);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="电池"><a href="#电池" class="headerlink" title="电池"></a>电池</h4><blockquote>
+<p>frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryControllerImpl<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(<span class="keyword">final</span> Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> String action = intent.getAction();</span><br><span class="line">    <span class="keyword">if</span> (action.equals(Intent.ACTION_BATTERY_CHANGED)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mTestmode &amp;&amp; !intent.getBooleanExtra(<span class="string">"testmode"</span>, <span class="keyword">false</span>)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//BatteryManager.EXTRA_LEVEL:当前电量,BatteryManager.EXTRA_SCALE:电量最大值,BatteryManager.EXTRA_PLUGGED:当前使用的电源</span></span><br><span class="line">        mLevel = (<span class="keyword">int</span>)(<span class="number">100</span>f</span><br><span class="line">                * intent.getIntExtra(BatteryManager.EXTRA_LEVEL, <span class="number">0</span>)</span><br><span class="line">                / intent.getIntExtra(BatteryManager.EXTRA_SCALE, <span class="number">100</span>));</span><br><span class="line">        mPluggedIn = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, <span class="number">0</span>) != <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//BatteryManager.EXTRA_STATUS:是否在充电</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,</span><br><span class="line">                BatteryManager.BATTERY_STATUS_UNKNOWN);</span><br><span class="line">        <span class="comment">//BatteryManager.BATTERY_STATUS_FULL:电池充满</span></span><br><span class="line">        mCharged = status == BatteryManager.BATTERY_STATUS_FULL;</span><br><span class="line">        <span class="comment">//BatteryManager.BATTERY_STATUS_CHARGING:充电状态</span></span><br><span class="line">        mCharging = mCharged || status == BatteryManager.BATTERY_STATUS_CHARGING;</span><br><span class="line"></span><br><span class="line">        fireBatteryLevelChanged();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.equals(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED)) &#123;</span><br><span class="line">        updatePowerSave();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.equals(PowerManager.ACTION_POWER_SAVE_MODE_CHANGING)) &#123;</span><br><span class="line">        setPowerSave(intent.getBooleanExtra(PowerManager.EXTRA_POWER_SAVE_MODE, <span class="keyword">false</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.equals(ACTION_LEVEL_TEST)) &#123;</span><br><span class="line">        mTestmode = <span class="keyword">true</span>;</span><br><span class="line">        mHandler.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="keyword">int</span> curLevel = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> incr = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> saveLevel = mLevel;</span><br><span class="line">            <span class="keyword">boolean</span> savePlugged = mPluggedIn;</span><br><span class="line">            Intent dummy = <span class="keyword">new</span> Intent(Intent.ACTION_BATTERY_CHANGED);</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (curLevel &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    mTestmode = <span class="keyword">false</span>;</span><br><span class="line">                    dummy.putExtra(<span class="string">"level"</span>, saveLevel);</span><br><span class="line">                    dummy.putExtra(<span class="string">"plugged"</span>, savePlugged);</span><br><span class="line">                    dummy.putExtra(<span class="string">"testmode"</span>, <span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dummy.putExtra(<span class="string">"level"</span>, curLevel);</span><br><span class="line">                    dummy.putExtra(<span class="string">"plugged"</span>, incr &gt; <span class="number">0</span> ? BatteryManager.BATTERY_PLUGGED_AC</span><br><span class="line">                            : 0);</span><br><span class="line">                    dummy.putExtra(<span class="string">"testmode"</span>, <span class="keyword">true</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                context.sendBroadcast(dummy);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (!mTestmode) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">                curLevel += incr;</span><br><span class="line">                <span class="keyword">if</span> (curLevel == <span class="number">100</span>) &#123;</span><br><span class="line">                    incr *= <span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                mHandler.postDelayed(<span class="keyword">this</span>, <span class="number">200</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//遍历回调通知电池电量改变</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">fireBatteryLevelChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> N = mChangeCallbacks.size();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        mChangeCallbacks.get(i).onBatteryLevelChanged(mLevel, mPluggedIn, mCharging);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h3 id="PanelHolder-下拉界面"><a href="#PanelHolder-下拉界面" class="headerlink" title="PanelHolder(下拉界面)"></a>PanelHolder(下拉界面)</h3><hr>
+<h3 id="Notification-下拉界面里的通知"><a href="#Notification-下拉界面里的通知" class="headerlink" title="Notification(下拉界面里的通知)"></a>Notification(下拉界面里的通知)</h3><hr>
+<h3 id="QuickSetting-下拉界面里的快捷按钮"><a href="#QuickSetting-下拉界面里的快捷按钮" class="headerlink" title="QuickSetting(下拉界面里的快捷按钮)"></a>QuickSetting(下拉界面里的快捷按钮)</h3><hr>
+<h3 id="NavigationBar-返回键-Home键-最近打开应用按键所在菜单"><a href="#NavigationBar-返回键-Home键-最近打开应用按键所在菜单" class="headerlink" title="NavigationBar(返回键,Home键,最近打开应用按键所在菜单)"></a>NavigationBar(返回键,Home键,最近打开应用按键所在菜单)</h3><h4 id="去掉NavigationBar-未测试，留待测试"><a href="#去掉NavigationBar-未测试，留待测试" class="headerlink" title="去掉NavigationBar(未测试，留待测试)"></a>去掉NavigationBar(未测试，留待测试)</h4><ol>
+<li><p>修改frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mDisplay = ((WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE))</span><br><span class="line">            .getDefaultDisplay();</span><br><span class="line">    updateDisplaySize();</span><br><span class="line">    mScrimSrcModeEnabled = mContext.getResources().getBoolean(</span><br><span class="line">            R.bool.config_status_bar_scrim_behind_use_src);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">super</span>.start(); <span class="comment">// calls createAndAddWindows()</span></span><br><span class="line"></span><br><span class="line">    mMediaSessionManager</span><br><span class="line">            = (MediaSessionManager) mContext.getSystemService(Context.MEDIA_SESSION_SERVICE);</span><br><span class="line"></span><br><span class="line">    addNavigationBar();<span class="comment">//注释这行,不添加NavigationBar</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改frameworks/base/core/res/res/values/configs</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Whether a software navigation bar should be shown. <span class="doctag">NOTE:</span> in the future this may be</span></span><br><span class="line"><span class="comment">     autodetected from the Configuration. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bool</span> <span class="attr">name</span>=<span class="string">"config_showNavigationBar"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">bool</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- false表示不显示，true表示显示--&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="显示流程"><a href="#显示流程" class="headerlink" title="显示流程"></a>显示流程</h4><blockquote>
+<p>frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mDisplay = ((WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE))</span><br><span class="line">            .getDefaultDisplay();</span><br><span class="line">    updateDisplaySize();</span><br><span class="line">    mScrimSrcModeEnabled = mContext.getResources().getBoolean(</span><br><span class="line">            R.bool.config_status_bar_scrim_behind_use_src);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">super</span>.start(); <span class="comment">// calls createAndAddWindows()</span></span><br><span class="line"></span><br><span class="line">    mMediaSessionManager</span><br><span class="line">            = (MediaSessionManager) mContext.getSystemService(Context.MEDIA_SESSION_SERVICE);</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> use MediaSessionManager.SessionListener to hook us up to future updates</span></span><br><span class="line">    <span class="comment">// in session state</span></span><br><span class="line"></span><br><span class="line">    addNavigationBar();</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通过super.start()调用createAndAddWindows</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">createAndAddWindows</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    addStatusBarWindow();</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">addStatusBarWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    makeStatusBarView();</span><br><span class="line">    mStatusBarWindowManager = <span class="keyword">new</span> StatusBarWindowManager(mContext);</span><br><span class="line">    mRemoteInputController = <span class="keyword">new</span> RemoteInputController(mStatusBarWindowManager,</span><br><span class="line">            mHeadsUpManager);</span><br><span class="line">    mStatusBarWindowManager.add(mStatusBarWindow, getStatusBarHeight());</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">protected</span> <span class="function">PhoneStatusBarView <span class="title">makeStatusBarView</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//接下一个类WindowManagerService里方法hasNavigationBar()</span></span><br><span class="line">        <span class="keyword">boolean</span> showNav = mWindowManagerService.hasNavigationBar();</span><br><span class="line">        <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"hasNavigationBar="</span> + showNav);</span><br><span class="line">        <span class="keyword">if</span> (showNav) &#123;</span><br><span class="line">            createNavigationBarView(context);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (RemoteException ex) &#123;</span><br><span class="line">        <span class="comment">// no window manager? good luck with that</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">createNavigationBarView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    inflateNavigationBarView(context);</span><br><span class="line">    mNavigationBarView.setDisabledFlags(mDisabled1);</span><br><span class="line">    mNavigationBarView.setComponents(mRecents, getComponent(Divider.class));</span><br><span class="line">    mNavigationBarView.setOnVerticalChangedListener(</span><br><span class="line">            <span class="keyword">new</span> NavigationBarView.OnVerticalChangedListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onVerticalChanged</span><span class="params">(<span class="keyword">boolean</span> isVertical)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (mAssistManager != <span class="keyword">null</span>) &#123;</span><br><span class="line">                mAssistManager.onConfigurationChanged();</span><br><span class="line">            &#125;</span><br><span class="line">            mNotificationPanel.setQsScrimEnabled(!isVertical);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    mNavigationBarView.setOnTouchListener(<span class="keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span> </span>&#123;</span><br><span class="line">            checkUserAutohide(v, event);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">inflateNavigationBarView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    mNavigationBarView = (NavigationBarView) View.inflate(</span><br><span class="line">            context, R.layout.navigation_bar, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>frameworks/base/services/core/java/com/android/server/wm/WindowManagerService<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">hasNavigationBar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">return</span> mPolicy.<span class="title">hasNavigationBar</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use this instead of checking config_showNavigationBar so that it can be consistently</span></span><br><span class="line"><span class="comment">// overridden by qemu.hw.mainkeys in the emulator.</span></span><br><span class="line">@Override</span><br><span class="line"><span class="function"><span class="keyword">public</span> boolean <span class="title">hasNavigationBar</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> mHasNavigationBar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInitialDisplaySize</span>(<span class="params">Display display, <span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="keyword">int</span> density</span>)</span> &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">//从config获取boolean值</span></span><br><span class="line">    mHasNavigationBar = res.getBoolean(com.android.<span class="keyword">internal</span>.R.<span class="keyword">bool</span>.config_showNavigationBar);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//可以通过修改qemu.hw.mainkeys来覆盖config力的config_showNavigationBar获取来的值</span></span><br><span class="line">    <span class="comment">//(目前没有找到qemu.hw.mainkeys在哪里设置)</span></span><br><span class="line">    <span class="comment">// Allow a system property to override this. Used by the emulator.</span></span><br><span class="line">    <span class="comment">// See also hasNavigationBar().</span></span><br><span class="line">    String navBarOverride = SystemProperties.<span class="keyword">get</span>(<span class="string">"qemu.hw.mainkeys"</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"1"</span>.<span class="keyword">equals</span>(navBarOverride)) &#123;</span><br><span class="line">        mHasNavigationBar = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"0"</span>.<span class="keyword">equals</span>(navBarOverride)) &#123;</span><br><span class="line">        mHasNavigationBar = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="点击流程"><a href="#点击流程" class="headerlink" title="点击流程"></a>点击流程</h4><blockquote>
+<p>frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    addNavigationBar();</span><br><span class="line">    <span class="comment">//...    </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// For small-screen devices (read: phones) that lack hardware navigation buttons</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">addNavigationBar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"addNavigationBar: about to add "</span> + mNavigationBarView);</span><br><span class="line">    <span class="keyword">if</span> (mNavigationBarView == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    prepareNavigationBarView();</span><br><span class="line"></span><br><span class="line">    mWindowManager.addView(mNavigationBarView, getNavigationBarLayoutParams());</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">prepareNavigationBarView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mNavigationBarView.reorient();</span><br><span class="line"></span><br><span class="line">    ButtonDispatcher recentsButton = mNavigationBarView.getRecentsButton();</span><br><span class="line">    recentsButton.setOnClickListener(mRecentsClickListener);</span><br><span class="line">    recentsButton.setOnTouchListener(mRecentsPreloadOnTouchListener);</span><br><span class="line">    recentsButton.setLongClickable(<span class="keyword">true</span>);</span><br><span class="line">    recentsButton.setOnLongClickListener(mRecentsLongClickListener);</span><br><span class="line"></span><br><span class="line">    ButtonDispatcher backButton = mNavigationBarView.getBackButton();</span><br><span class="line">    backButton.setLongClickable(<span class="keyword">true</span>);</span><br><span class="line">    backButton.setOnLongClickListener(mLongPressBackListener);</span><br><span class="line"></span><br><span class="line">    ButtonDispatcher homeButton = mNavigationBarView.getHomeButton();</span><br><span class="line">    homeButton.setOnTouchListener(mHomeActionListener);</span><br><span class="line">    homeButton.setOnLongClickListener(mLongPressHomeListener);</span><br><span class="line"></span><br><span class="line">    mAssistManager.onConfigurationChanged();</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//以recentsButton为例，OnClickListener</span></span><br><span class="line"><span class="keyword">private</span> View.OnClickListener mRecentsClickListener = <span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        awakenDreams();</span><br><span class="line">        toggleRecentApps();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/记录/" rel="tag"># 记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/10/android_greendao/" rel="next" title="GreenDao">
+                <i class="fa fa-chevron-left"></i> GreenDao
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/android_source_question/" rel="prev" title="安卓源码编译问题汇总">
+                安卓源码编译问题汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="xyuxiao">
+            
+              <p class="site-author-name" itemprop="name">xyuxiao</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示SystemUI"><span class="nav-number">1.</span> <span class="nav-text">显示SystemUI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AndroidManifest-xml"><span class="nav-number">2.</span> <span class="nav-text">AndroidManifest.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动流程"><span class="nav-number">3.</span> <span class="nav-text">启动流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StatusBar-状态栏"><span class="nav-number">4.</span> <span class="nav-text">StatusBar(状态栏)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#去掉StatusBar"><span class="nav-number">4.1.</span> <span class="nav-text">去掉StatusBar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#状态栏图标-StatusBarIconController-java"><span class="nav-number">4.2.</span> <span class="nav-text">状态栏图标(StatusBarIconController.java)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电池"><span class="nav-number">4.3.</span> <span class="nav-text">电池</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PanelHolder-下拉界面"><span class="nav-number">5.</span> <span class="nav-text">PanelHolder(下拉界面)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Notification-下拉界面里的通知"><span class="nav-number">6.</span> <span class="nav-text">Notification(下拉界面里的通知)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QuickSetting-下拉界面里的快捷按钮"><span class="nav-number">7.</span> <span class="nav-text">QuickSetting(下拉界面里的快捷按钮)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NavigationBar-返回键-Home键-最近打开应用按键所在菜单"><span class="nav-number">8.</span> <span class="nav-text">NavigationBar(返回键,Home键,最近打开应用按键所在菜单)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#去掉NavigationBar-未测试，留待测试"><span class="nav-number">8.1.</span> <span class="nav-text">去掉NavigationBar(未测试，留待测试)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示流程"><span class="nav-number">8.2.</span> <span class="nav-text">显示流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#点击流程"><span class="nav-number">8.3.</span> <span class="nav-text">点击流程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyuxiao</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value"> 访问人数:</span>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value"> 访问次数:</span>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '91632d3a671d19305b9d',
+    clientSecret: '175c31ef8f9f9892a4b3d063193fce2079c9cf16',
+    repo: 'xyuxiao.github.io',
+    owner: 'xyuxiao',
+    admin: ['xyuxiao'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

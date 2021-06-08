@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="HttpClient关于SDK&amp;gt;23Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入123android &amp;#123;    useLibrary &apos;org.apache.http.legacy&apos;&amp;#125; Android8出现app is in background uid Uid">
+<meta name="keywords" content="记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android记录">
+<meta property="og:url" content="http://yoursite.com/2019/05/13/android_note/index.html">
+<meta property="og:site_name" content="xyuxiao">
+<meta property="og:description" content="HttpClient关于SDK&amp;gt;23Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入123android &amp;#123;    useLibrary &apos;org.apache.http.legacy&apos;&amp;#125; Android8出现app is in background uid Uid">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-06-08T03:17:04.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android记录">
+<meta name="twitter:description" content="HttpClient关于SDK&amp;gt;23Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入123android &amp;#123;    useLibrary &apos;org.apache.http.legacy&apos;&amp;#125; Android8出现app is in background uid Uid">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/13/android_note/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android记录 | xyuxiao</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xyuxiao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">如梦一场</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/android_note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android记录
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-13 15:22:36" itemprop="dateCreated datePublished" datetime="2019-05-13T15:22:36Z">2019-05-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:17:04" itemprop="dateModified" datetime="2021-06-08T03:17:04Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="HttpClient关于SDK-gt-23"><a href="#HttpClient关于SDK-gt-23" class="headerlink" title="HttpClient关于SDK&gt;23"></a>HttpClient关于SDK&gt;23</h4><p>Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="attribute">useLibrary</span> <span class="string">'org.apache.http.legacy'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Android8出现app-is-in-background-uid-UidRecord"><a href="#Android8出现app-is-in-background-uid-UidRecord" class="headerlink" title="Android8出现app is in background uid UidRecord"></a>Android8出现app is in background uid UidRecord</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (<span class="keyword">Build.VERSION.SDK_INT </span>&gt;= <span class="keyword">Build.VERSION_CODES.O) </span>&#123;</span><br><span class="line">    <span class="built_in">context</span>.startForegroundService(m_msgIntent)<span class="comment">;</span></span><br><span class="line">&#125; else &#123;</span><br><span class="line">    <span class="built_in">context</span>.startService(m_msgIntent)<span class="comment">; //</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Android9出现requires-android-permission-FOREGROUND-SERVICE"><a href="#Android9出现requires-android-permission-FOREGROUND-SERVICE" class="headerlink" title="Android9出现requires android.permission.FOREGROUND_SERVICE"></a>Android9出现requires android.permission.FOREGROUND_SERVICE</h4><p>java.lang.SecurityException: Permission Denial: startForeground from pid=9564, uid=12350 requires android.permission.FOREGROUND_SERVICE<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.FOREGROUND_SERVICE"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h4 id="禁止录屏"><a href="#禁止录屏" class="headerlink" title="禁止录屏"></a>禁止录屏</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">getWindow</span>()<span class="selector-class">.addFlags</span>(<span class="selector-tag">WindowManager</span><span class="selector-class">.LayoutParams</span><span class="selector-class">.FLAG_SECURE</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="运行项目报错Error-while-executing-am-start-n-“xxxxxx”-a-android-intent-action-MAIN-c-android-intent-category-LAUNCHER"><a href="#运行项目报错Error-while-executing-am-start-n-“xxxxxx”-a-android-intent-action-MAIN-c-android-intent-category-LAUNCHER" class="headerlink" title="运行项目报错Error while executing: am start -n “xxxxxx” -a android.intent.action.MAIN -c android.intent.category.LAUNCHER"></a>运行项目报错Error while executing: am start -n “xxxxxx” -a android.intent.action.MAIN -c android.intent.category.LAUNCHER</h4><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error </span>while executing: am start -n "xxxxxx" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER</span><br><span class="line">Starting: Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=xxxxxx &#125;</span><br><span class="line"><span class="keyword">Error </span>type 3</span><br><span class="line"><span class="keyword">Error: </span>Activity class &#123;xxxxxx&#125; does not exist.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Error </span>while Launching activity</span><br></pre></td></tr></table></figure>
+<p>运行项目出现以上报错, 搜了谷歌给出的解决方案</p>
+<ol>
+<li>clean, Invalidate Caches / Restart</li>
+<li>关闭Instant Run</li>
+</ol>
+<p>第一种方法尝试没有效果, 第二种方法AS用的是4.0, 已经没有Instant Run了。最后发现是Edit Configurations里Installation Options里Deploy选了Nothing,改为Default APK再运行就解决了问题。</p>
+<h4 id="FileWrite中文乱码问题"><a href="#FileWrite中文乱码问题" class="headerlink" title="FileWrite中文乱码问题"></a>FileWrite中文乱码问题</h4><figure class="highlight java"><figcaption><span>FileWriter 默认是用ISO-8859-1 or US-ASCII，不是UTF-8的</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解决方法</span></span><br><span class="line"><span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(file), <span class="string">"UTF-8"</span>));</span><br></pre></td></tr></table></figure>
+<h4 id="应用作为桌面应用开机的时候启动两次Activity"><a href="#应用作为桌面应用开机的时候启动两次Activity" class="headerlink" title="应用作为桌面应用开机的时候启动两次Activity"></a>应用作为桌面应用开机的时候启动两次Activity</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">添加android:<span class="attribute">configChanges</span>=<span class="string">"touchscreen"</span>,因为是usb屏幕,启动机制原因,所以添加touchscreen,别的原因导致的问题同理</span><br></pre></td></tr></table></figure>
+<h4 id="build出现问题-Error-The-number-of-method-references-in-a-dex-file-cannot-exceed-64K"><a href="#build出现问题-Error-The-number-of-method-references-in-a-dex-file-cannot-exceed-64K" class="headerlink" title="build出现问题 Error:The number of method references in a .dex file cannot exceed 64K."></a>build出现问题 Error:The number of method references in a .dex file cannot exceed 64K.</h4><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error:The <span class="built_in">number</span> <span class="keyword">of</span> method references <span class="keyword">in</span> <span class="keyword">a</span> .dex <span class="built_in">file</span> cannot exceed <span class="number">64</span>K.</span><br><span class="line">Learn how <span class="built_in">to</span> <span class="built_in">resolve</span> this issue <span class="keyword">at</span> <span class="keyword">https</span>://developer.android.com/tools/building/multidex.html</span><br><span class="line">解决方法:build.gradle-&gt;android-&gt;defaultConfig里加multiDexEnabled <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h4 id="修改静态ip"><a href="#修改静态ip" class="headerlink" title="修改静态ip"></a>修改静态ip</h4><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">boolean</span> ethernet(<span class="keyword">String</span> localIp, <span class="keyword">String</span> localGateway, <span class="keyword">String</span> localMask, <span class="keyword">String</span> dns1, <span class="keyword">String</span> dns2) &#123;</span><br><span class="line">    <span class="keyword">if</span> (mPwIpTip == <span class="keyword">null</span>) &#123;</span><br><span class="line">        View view = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.dialog_ip_tip, <span class="keyword">null</span>);</span><br><span class="line">        mTvIpTitle = (TextView) view.findViewById(R.id.dialog_title);</span><br><span class="line">        mTvIpTip = (TextView) view.findViewById(R.id.tip_tv);</span><br><span class="line">        mBtnTip = (Button) view.findViewById(R.id.tip_btn);</span><br><span class="line"></span><br><span class="line">        mBtnTip.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> onClick(View v) &#123;</span><br><span class="line">                <span class="keyword">super</span>.onClick(v);</span><br><span class="line">                Util.dismissPopup(mPwIpTip);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        FontUtil.getInstance().setTypeface(mTvIpTitle, FontUtil.FONT_BLACK);</span><br><span class="line">        FontUtil.getInstance().setTypeface(<span class="keyword">new</span> View[]&#123;mTvIpTip, mBtnTip&#125;, FontUtil.FONT_PINGFANG_REGULAR);</span><br><span class="line"></span><br><span class="line">        mPwIpTip = <span class="keyword">new</span> PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);</span><br><span class="line">        mPwIpTip.setFocusable(<span class="keyword">true</span>);</span><br><span class="line">        mPwIpTip.setTouchable(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//分割Ip</span></span><br><span class="line">    <span class="keyword">String</span>[] ipStrings = localIp.<span class="built_in">split</span>(<span class="string">"\\."</span>);</span><br><span class="line">    <span class="comment">//分割子网掩码</span></span><br><span class="line">    <span class="keyword">String</span>[] masks = localMask.<span class="built_in">split</span>(<span class="string">"\\."</span>);</span><br><span class="line">    <span class="comment">//分割网关</span></span><br><span class="line">    <span class="keyword">String</span>[] gateWayStrings = localGateway.<span class="built_in">split</span>(<span class="string">"\\."</span>);</span><br><span class="line">    <span class="comment">//分割DNS1</span></span><br><span class="line">    <span class="keyword">String</span>[] dns1Strings = dns1.<span class="built_in">split</span>(<span class="string">"\\."</span>);</span><br><span class="line">    <span class="comment">//分割DNS2</span></span><br><span class="line">    <span class="keyword">String</span>[] dns2Strings = dns2.<span class="built_in">split</span>(<span class="string">"\\."</span>);</span><br><span class="line">    <span class="keyword">if</span> (ipStrings == <span class="keyword">null</span> || ipStrings.length != <span class="number">4</span>) &#123;</span><br><span class="line">        mTvIpTip.setText(<span class="string">"枪柜IP输入有误"</span>);</span><br><span class="line">        Util.showPopup(mPwIpTip, getWindow().getDecorView());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (gateWayStrings == <span class="keyword">null</span> || gateWayStrings.length != <span class="number">4</span>) &#123;</span><br><span class="line">        mTvIpTip.setText(<span class="string">"默认网关输入有误"</span>);</span><br><span class="line">        Util.showPopup(mPwIpTip, getWindow().getDecorView());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (masks == <span class="keyword">null</span> || masks.length != <span class="number">4</span>) &#123;</span><br><span class="line">        mTvIpTip.setText(<span class="string">"子网掩码输入有误"</span>);</span><br><span class="line">        Util.showPopup(mPwIpTip, getWindow().getDecorView());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dns1Strings == <span class="keyword">null</span> || dns1Strings.length != <span class="number">4</span>) &#123;</span><br><span class="line">        mTvIpTip.setText(<span class="string">"DNS1输入有误"</span>);</span><br><span class="line">        Util.showPopup(mPwIpTip, getWindow().getDecorView());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dns2Strings == <span class="keyword">null</span> || dns2Strings.length != <span class="number">4</span>) &#123;</span><br><span class="line">        mTvIpTip.setText(<span class="string">"DNS2输入有误"</span>);</span><br><span class="line">        Util.showPopup(mPwIpTip, getWindow().getDecorView());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取ETHERNET_SERVICE参数</span></span><br><span class="line">            <span class="keyword">String</span> ETHERNET_SERVICE = (<span class="keyword">String</span>) Context.class.getField(<span class="string">"ETHERNET_SERVICE"</span>).<span class="built_in">get</span>(<span class="keyword">null</span>);</span><br><span class="line">            Class&lt;?&gt; ethernetManagerClass = Class.forName(<span class="string">"android.net.EthernetManager"</span>);</span><br><span class="line">            Class&lt;?&gt; ipConfigurationClass = Class.forName(<span class="string">"android.net.IpConfiguration"</span>);</span><br><span class="line">            <span class="comment">//获取ethernetManager服务对象</span></span><br><span class="line">            <span class="keyword">Object</span> ethernetManager = getSystemService(ETHERNET_SERVICE);</span><br><span class="line">            <span class="keyword">Object</span> getConfiguration = ethernetManagerClass.getDeclaredMethod(<span class="string">"getConfiguration"</span>).invoke(ethernetManager);</span><br><span class="line">            <span class="comment">//获取在EthernetManager中的抽象类mService成员变量</span></span><br><span class="line">            Field mService = ethernetManagerClass.getDeclaredField(<span class="string">"mService"</span>);</span><br><span class="line">            <span class="comment">//修改private权限</span></span><br><span class="line">            mService.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            <span class="comment">//获取抽象类的实例化对象</span></span><br><span class="line">            <span class="keyword">Object</span> mServiceObject = mService.<span class="built_in">get</span>(ethernetManager);</span><br><span class="line">            Class&lt;?&gt; iEthernetManagerClass = Class.forName(<span class="string">"android.net.IEthernetManager"</span>);</span><br><span class="line">            Method[] methods = iEthernetManagerClass.getDeclaredMethods();</span><br><span class="line">            <span class="keyword">for</span> (Method ms : methods) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ms.getName().equals(<span class="string">"setEthernetEnabled"</span>)) &#123;</span><br><span class="line">                    ms.invoke(mServiceObject, <span class="keyword">true</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            Class&lt;?&gt; staticIpConfig = Class.forName(<span class="string">"android.net.StaticIpConfiguration"</span>);</span><br><span class="line">            Constructor&lt;?&gt; staticIpConfigConstructor = staticIpConfig.getDeclaredConstructor(staticIpConfig);</span><br><span class="line">            <span class="keyword">Object</span> staticIpConfigInstance = staticIpConfig.newInstance();</span><br><span class="line">            <span class="comment">//获取LinkAddress里面只有一个String类型的构造方法</span></span><br><span class="line">            Constructor&lt;?&gt; linkAddressConstructor = LinkAddress.class.getDeclaredConstructor(<span class="keyword">String</span>.class);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//转换为二进制并计算有多少个1</span></span><br><span class="line">            <span class="built_in">int</span> mask = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">String</span> ms : masks) &#123;</span><br><span class="line">                <span class="built_in">int</span> a = Integer.parseInt(ms);</span><br><span class="line">                <span class="keyword">String</span> s = Integer.toBinaryString(a);</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> ((s.charAt(i) + <span class="string">""</span>).equals(<span class="string">"1"</span>)) &#123;</span><br><span class="line">                        mask++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            LinkAddress linkAddress = (LinkAddress) linkAddressConstructor.newInstance(localIp + <span class="string">"/"</span> + mask);</span><br><span class="line">            Class&lt;?&gt; inetAddressClass = Class.forName(<span class="string">"java.net.InetAddress"</span>);</span><br><span class="line">            Constructor&lt;?&gt;[] inetAddressConstructors = inetAddressClass.getDeclaredConstructors();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//默认网关参数</span></span><br><span class="line">            InetAddress inetAddress = <span class="keyword">null</span>;</span><br><span class="line">            <span class="built_in">byte</span>[] bytes = <span class="keyword">new</span> <span class="built_in">byte</span>[gateWayStrings.length];</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; gateWayStrings.length; i++) &#123;</span><br><span class="line">                bytes[i] = (<span class="built_in">byte</span>) Integer.parseInt(gateWayStrings[i]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//dns</span></span><br><span class="line">            ArrayList&lt;InetAddress&gt; inetAddresses = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="built_in">byte</span>[] bytes1 = <span class="keyword">new</span> <span class="built_in">byte</span>[dns1Strings.length];</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; dns1Strings.length; i++) &#123;</span><br><span class="line">                bytes1[i] = (<span class="built_in">byte</span>) Integer.parseInt(dns1Strings[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">byte</span>[] bytes2 = <span class="keyword">new</span> <span class="built_in">byte</span>[dns2Strings.length];</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; dns2Strings.length; i++) &#123;</span><br><span class="line">                bytes2[i] = (<span class="built_in">byte</span>) Integer.parseInt(dns2Strings[i]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (Constructor inetc : inetAddressConstructors) &#123;</span><br><span class="line">                <span class="comment">//获取有三种参数类型的构造方法</span></span><br><span class="line">                <span class="keyword">if</span> (inetc.getParameterTypes().length == <span class="number">3</span>) &#123;</span><br><span class="line">                    <span class="comment">//修改权限</span></span><br><span class="line">                    inetc.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                    inetAddress = (InetAddress) inetc.newInstance(<span class="number">2</span>, bytes, localMask);</span><br><span class="line">                    inetAddresses.<span class="built_in">add</span>((InetAddress) inetc.newInstance(<span class="number">2</span>, bytes1, localMask));</span><br><span class="line">                    inetAddresses.<span class="built_in">add</span>((InetAddress) inetc.newInstance(<span class="number">2</span>, bytes2, localMask));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//获取staticIpConfig中所有的成员变量</span></span><br><span class="line">            Field[] declaredFields = staticIpConfigInstance.getClass().getDeclaredFields();</span><br><span class="line">            <span class="keyword">for</span> (Field f : declaredFields) &#123;</span><br><span class="line">                <span class="comment">//设置成员变量的值</span></span><br><span class="line">                <span class="keyword">if</span> (f.getName().equals(<span class="string">"ipAddress"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//设置IP地址和子网掩码</span></span><br><span class="line">                    f.<span class="built_in">set</span>(staticIpConfigInstance, linkAddress);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (f.getName().equals(<span class="string">"gateway"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//设置默认网关</span></span><br><span class="line">                    f.<span class="built_in">set</span>(staticIpConfigInstance, inetAddress);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (f.getName().equals(<span class="string">"domains"</span>)) &#123;</span><br><span class="line">                    f.<span class="built_in">set</span>(staticIpConfigInstance, <span class="string">""</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (f.getName().equals(<span class="string">"dnsServers"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//设置DNS</span></span><br><span class="line">                    ((List&lt;InetAddress&gt;) f.<span class="built_in">get</span>(staticIpConfigInstance)).addAll(inetAddresses);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">Object</span> staticInstance = staticIpConfigConstructor.newInstance(staticIpConfigInstance);</span><br><span class="line">            <span class="comment">//存放ipASSignment枚举类参数的集合</span></span><br><span class="line">            <span class="keyword">HashMap</span> ipAssignmentMap = <span class="keyword">new</span> <span class="keyword">HashMap</span>();</span><br><span class="line">            <span class="comment">//存放proxySettings枚举类参数的集合</span></span><br><span class="line">            <span class="keyword">HashMap</span> proxySettingsMap = <span class="keyword">new</span> <span class="keyword">HashMap</span>();</span><br><span class="line">            Class&lt;?&gt;[] enumClass = ipConfigurationClass.getDeclaredClasses();</span><br><span class="line">            <span class="keyword">for</span> (Class enumC : enumClass) &#123;</span><br><span class="line">                <span class="comment">//获取枚举数组</span></span><br><span class="line">                <span class="keyword">Object</span>[] enumConstants = enumC.getEnumConstants();</span><br><span class="line">                <span class="keyword">if</span> (enumC.getSimpleName().equals(<span class="string">"ProxySettings"</span>)) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">Object</span> enu : enumConstants) &#123;</span><br><span class="line">                        <span class="comment">//设置代理设置集合 STATIC DHCP UNASSIGNED PAC</span></span><br><span class="line">                        proxySettingsMap.put(enu.toString(), enu);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (enumC.getSimpleName().equals(<span class="string">"IpAssignment"</span>)) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">Object</span> enu : enumConstants) &#123;</span><br><span class="line">                        <span class="comment">//设置以太网连接模式设置集合 STATIC DHCP UNASSIGNED</span></span><br><span class="line">                        ipAssignmentMap.put(enu.toString(), enu);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//获取ipConfiguration类的构造方法</span></span><br><span class="line">            <span class="keyword">Object</span> ipConfigurationInstance = <span class="keyword">null</span>;</span><br><span class="line">            Constructor&lt;?&gt;[] ipConfigConstructors = ipConfigurationClass.getDeclaredConstructors();</span><br><span class="line">            <span class="keyword">for</span> (Constructor constru : ipConfigConstructors) &#123;</span><br><span class="line">                <span class="comment">//获取ipConfiguration类的4个参数的构造方法</span></span><br><span class="line">                <span class="keyword">if</span> (constru.getParameterTypes().length == <span class="number">4</span>) &#123;<span class="comment">//设置以上四种类型</span></span><br><span class="line">                    <span class="comment">//初始化ipConfiguration对象,设置参数</span></span><br><span class="line">                    ipConfigurationInstance = constru.newInstance(ipAssignmentMap.<span class="built_in">get</span>(<span class="string">"STATIC"</span>),</span><br><span class="line">                            proxySettingsMap.<span class="built_in">get</span>(<span class="string">"NONE"</span>), staticInstance, ProxyInfo.buildDirectProxy(<span class="keyword">null</span>, <span class="number">0</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//获取ipConfiguration类中带有StaticIpConfiguration参数类型的名叫setStaticIpConfiguration的方法</span></span><br><span class="line">            Method setStaticIpConfiguration = ipConfigurationClass.getDeclaredMethod(<span class="string">"setStaticIpConfiguration"</span>, staticIpConfig);</span><br><span class="line">            <span class="comment">//修改private方法权限</span></span><br><span class="line">            setStaticIpConfiguration.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            <span class="comment">//在ipConfiguration对象中使用setStaticIpConfiguration方法,并传入参数</span></span><br><span class="line">            setStaticIpConfiguration.invoke(ipConfigurationInstance, staticInstance);</span><br><span class="line">            <span class="keyword">Object</span> ethernetManagerInstance = ethernetManagerClass.getDeclaredConstructor(</span><br><span class="line">                    Context.class, iEthernetManagerClass).newInstance(<span class="keyword">this</span>, mServiceObject);</span><br><span class="line">            ethernetManagerClass.getDeclaredMethod(<span class="string">"setConfiguration"</span>, ipConfigurationClass).invoke(ethernetManagerInstance, ipConfigurationInstance);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (java.lang.InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="the-number-of-method-references-in-a-dex-file-cannot-exceed-64k"><a href="#the-number-of-method-references-in-a-dex-file-cannot-exceed-64k" class="headerlink" title="the number of method references in a .dex file cannot exceed 64k"></a>the number of method references in a .dex file cannot exceed 64k</h4><blockquote>
+<p>解决办法：如果minSdkVersion小于等于20，在defaultConfig节点中加入multiDexEnabledtrue语句</p>
+</blockquote>
+<blockquote>
+<p>参考文档<a href="https://stackoverflow.com/questions/36638756/unable-to-build-apk-the-number-of-method-references-cannot-exceed-64k" target="_blank" rel="noopener">https://stackoverflow.com/questions/36638756/unable-to-build-apk-the-number-of-method-references-cannot-exceed-64k</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/记录/" rel="tag"># 记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/13/note_everything/" rel="next" title="用做记录">
+                <i class="fa fa-chevron-left"></i> 用做记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/03/cocos_study/" rel="prev" title="cocos2dx-学习日记">
+                cocos2dx-学习日记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="xyuxiao">
+            
+              <p class="site-author-name" itemprop="name">xyuxiao</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpClient关于SDK-gt-23"><span class="nav-number">1.</span> <span class="nav-text">HttpClient关于SDK&gt;23</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android8出现app-is-in-background-uid-UidRecord"><span class="nav-number">2.</span> <span class="nav-text">Android8出现app is in background uid UidRecord</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android9出现requires-android-permission-FOREGROUND-SERVICE"><span class="nav-number">3.</span> <span class="nav-text">Android9出现requires android.permission.FOREGROUND_SERVICE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#禁止录屏"><span class="nav-number">4.</span> <span class="nav-text">禁止录屏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行项目报错Error-while-executing-am-start-n-“xxxxxx”-a-android-intent-action-MAIN-c-android-intent-category-LAUNCHER"><span class="nav-number">5.</span> <span class="nav-text">运行项目报错Error while executing: am start -n “xxxxxx” -a android.intent.action.MAIN -c android.intent.category.LAUNCHER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FileWrite中文乱码问题"><span class="nav-number">6.</span> <span class="nav-text">FileWrite中文乱码问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用作为桌面应用开机的时候启动两次Activity"><span class="nav-number">7.</span> <span class="nav-text">应用作为桌面应用开机的时候启动两次Activity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#build出现问题-Error-The-number-of-method-references-in-a-dex-file-cannot-exceed-64K"><span class="nav-number">8.</span> <span class="nav-text">build出现问题 Error:The number of method references in a .dex file cannot exceed 64K.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改静态ip"><span class="nav-number">9.</span> <span class="nav-text">修改静态ip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#the-number-of-method-references-in-a-dex-file-cannot-exceed-64k"><span class="nav-number">10.</span> <span class="nav-text">the number of method references in a .dex file cannot exceed 64k</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyuxiao</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value"> 访问人数:</span>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value"> 访问次数:</span>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '91632d3a671d19305b9d',
+    clientSecret: '175c31ef8f9f9892a4b3d063193fce2079c9cf16',
+    repo: 'xyuxiao.github.io',
+    owner: 'xyuxiao',
+    admin: ['xyuxiao'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

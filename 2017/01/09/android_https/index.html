@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="访问自签名网站 构造CertificateFactory对象，通过它的generateCertificate(is)方法得到Certificate。 然后讲得到的Certificate放入到keyStore中。 接下来利用keyStore去初始化我们的TrustManagerFactory 由trustManagerFactory.getTrustManagers获得TrustManager[]初">
+<meta name="keywords" content="记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="https">
+<meta property="og:url" content="http://yoursite.com/2017/01/09/android_https/index.html">
+<meta property="og:site_name" content="xyuxiao">
+<meta property="og:description" content="访问自签名网站 构造CertificateFactory对象，通过它的generateCertificate(is)方法得到Certificate。 然后讲得到的Certificate放入到keyStore中。 接下来利用keyStore去初始化我们的TrustManagerFactory 由trustManagerFactory.getTrustManagers获得TrustManager[]初">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-06-08T03:18:14.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="https">
+<meta name="twitter:description" content="访问自签名网站 构造CertificateFactory对象，通过它的generateCertificate(is)方法得到Certificate。 然后讲得到的Certificate放入到keyStore中。 接下来利用keyStore去初始化我们的TrustManagerFactory 由trustManagerFactory.getTrustManagers获得TrustManager[]初">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2017/01/09/android_https/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>https | xyuxiao</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xyuxiao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">如梦一场</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/09/android_https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">https
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-01-09 10:02:25" itemprop="dateCreated datePublished" datetime="2017-01-09T10:02:25Z">2017-01-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:18:14" itemprop="dateModified" datetime="2021-06-08T03:18:14Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="访问自签名网站"><a href="#访问自签名网站" class="headerlink" title="访问自签名网站"></a>访问自签名网站</h4><ul>
+<li>构造CertificateFactory对象，通过它的generateCertificate(is)方法得到Certificate。</li>
+<li>然后讲得到的Certificate放入到keyStore中。</li>
+<li>接下来利用keyStore去初始化我们的TrustManagerFactory</li>
+<li>由trustManagerFactory.getTrustManagers获得TrustManager[]初始化我们的SSLContext</li>
+<li>最后，设置我们mOkHttpClient.setSslSocketFactory即可。<a id="more"></a><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> setCertificates(InputStream... certificates)&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        CertificateFactory certificateFactory = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</span><br><span class="line">        KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());</span><br><span class="line">        keyStore.load(<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">index</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (InputStream certificate : certificates)&#123;</span><br><span class="line">            String certificateAlias = Integer.toString(<span class="keyword">index</span>++);</span><br><span class="line">            keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (certificate != <span class="keyword">null</span>)</span><br><span class="line">                    certificate.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        SSLContext sslContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</span><br><span class="line"></span><br><span class="line">        TrustManagerFactory trustManagerFactory = </span><br><span class="line">            TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()); </span><br><span class="line"></span><br><span class="line">        trustManagerFactory.init(keyStore);</span><br><span class="line">        sslContext.init(   </span><br><span class="line">                <span class="keyword">null</span>, </span><br><span class="line">                trustManagerFactory.getTrustManagers(), </span><br><span class="line">                <span class="keyword">new</span> SecureRandom()</span><br><span class="line">            );</span><br><span class="line">       mOkHttpClient.setSslSocketFactory(sslContext.getSocketFactory());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="type">CER_String</span> = <span class="string">"123"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void onCreate()&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//cer文件的方式</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">OkHttpClientManager</span>.getInstance()</span><br><span class="line">                    .setCertificates(getAssets().open(<span class="string">"srca.cer"</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="type">IOException</span> e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//字符串的方式</span></span><br><span class="line">        <span class="type">OkHttpClientManager</span>.getInstance()</span><br><span class="line">            .setCertificates(<span class="keyword">new</span> <span class="type">Buffer</span>()</span><br><span class="line">                    .writeUtf8(<span class="type">CER_String</span>)</span><br><span class="line">                    .inputStream());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="服务端Tomcat下部署"><a href="#服务端Tomcat下部署" class="headerlink" title="服务端Tomcat下部署"></a>服务端Tomcat下部署</h4><h5 id="生成jds"><a href="#生成jds" class="headerlink" title="生成jds"></a>生成jds</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -alias xyuxiao_server -keyalg RSA -keystore xyuxiao_server.jks -validity 3600 -storepass 123456</span><br><span class="line">您的名字与姓氏是什么?</span><br><span class="line">  [Unknown]:  x</span><br><span class="line">您的组织单位名称是什么?</span><br><span class="line">  [Unknown]:  x</span><br><span class="line">您的组织名称是什么?</span><br><span class="line">  [Unknown]:  x</span><br><span class="line">您所在的城市或区域名称是什么?</span><br><span class="line">  [Unknown]:  hz</span><br><span class="line">您所在的省/市/自治区名称是什么?</span><br><span class="line">  [Unknown]:  zj</span><br><span class="line">该单位的双字母国家/地区代码是什么?</span><br><span class="line">  [Unknown]:  cn</span><br><span class="line"><span class="attribute">CN</span>=x, <span class="attribute">OU</span>=x, <span class="attribute">O</span>=x, <span class="attribute">L</span>=hz, <span class="attribute">ST</span>=zj, <span class="attribute">C</span>=cn是否正确?</span><br><span class="line">  [否]:  y</span><br><span class="line"></span><br><span class="line">输入 &lt;xyuxiao_server&gt; 的密钥口令</span><br><span class="line">    (如果和密钥库口令相同, 按回车):</span><br></pre></td></tr></table></figure>
+<h5 id="根据jks生成cer证书"><a href="#根据jks生成cer证书" class="headerlink" title="根据jks生成cer证书"></a>根据jks生成cer证书</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">keytool -export -alias xyuxiao_server</span><br><span class="line">-file xyuxiao_server.cer</span><br><span class="line">-keystore xyuxiao_server.jks</span><br><span class="line">-storepass <span class="number">123456</span></span><br></pre></td></tr></table></figure>
+<h5 id="配置Tomcat-打开tomcat-conf-server-xml-在Server标签下添加"><a href="#配置Tomcat-打开tomcat-conf-server-xml-在Server标签下添加" class="headerlink" title="配置Tomcat,打开tomcat/conf/server.xml,在Server标签下添加"></a>配置Tomcat,打开tomcat/conf/server.xml,在Server标签下添加</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">SSLEnabled</span>=<span class="string">"true"</span></span><br><span class="line">    <span class="attribute">acceptCount</span>=<span class="string">"100"</span></span><br><span class="line">    <span class="attribute">clientAuth</span>=<span class="string">"false"</span></span><br><span class="line">    <span class="attribute">disableUploadTimeout</span>=<span class="string">"true"</span></span><br><span class="line">    <span class="attribute">enableLookups</span>=<span class="string">"true"</span></span><br><span class="line">    <span class="attribute">keystoreFile</span>=<span class="string">""</span>//刚生成的jks地址</span><br><span class="line">    <span class="attribute">keystorePass</span>=<span class="string">"123456"</span></span><br><span class="line">    <span class="attribute">maxSpareThreads</span>=<span class="string">"75"</span></span><br><span class="line">    <span class="attribute">maxThreads</span>=<span class="string">"200"</span></span><br><span class="line">    <span class="attribute">minSpareThreads</span>=<span class="string">"5"</span></span><br><span class="line">    <span class="attribute">port</span>=<span class="string">"88"</span></span><br><span class="line">    <span class="attribute">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11NioProtocol"</span></span><br><span class="line">    <span class="attribute">scheme</span>=<span class="string">"https"</span></span><br><span class="line">    <span class="attribute">secure</span>=<span class="string">"true"</span></span><br><span class="line">    <span class="attribute">sslProtocol</span>=<span class="string">"TLS"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="双向证书"><a href="#双向证书" class="headerlink" title="双向证书"></a>双向证书</h4><h5 id="配置服务器"><a href="#配置服务器" class="headerlink" title="配置服务器"></a>配置服务器</h5><p>对应xyuxiao_server.jks和xyuxiao_server.cer生成xyuxiao_client.jks和xyuxiao_client.cer,并把xyuxiao_client.cer添加到jks中<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keytool -import -<span class="built_in">alias</span> xyuxiao_client </span><br><span class="line">-<span class="built_in">file</span> xyuxiao_client.cer -keystore xyuxiao_client_for_server.jks</span><br></pre></td></tr></table></figure></p>
+<p>在Connector里继续添加属性,truststoreFile为xyuxiao_client_for_server.jks的路径<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector </span><br><span class="line">    <span class="comment">//其他属性与前面一致</span></span><br><span class="line">    clientAuth=<span class="string">"true"</span></span><br><span class="line">    truststoreFile=<span class="string">""</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<h5 id="配置客户端"><a href="#配置客户端" class="headerlink" title="配置客户端"></a>配置客户端</h5><p>Java默认识别jks,但是Android平台只识别bks,所以要先把jks转成bks<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> setCertificates(InputStream... certificates)&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        CertificateFactory certificateFactory = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</span><br><span class="line">        KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());</span><br><span class="line">        keyStore.load(<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">index</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (InputStream certificate : certificates)&#123;</span><br><span class="line">            String certificateAlias = Integer.toString(<span class="keyword">index</span>++);</span><br><span class="line">            keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (certificate != <span class="keyword">null</span>)</span><br><span class="line">                    certificate.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        SSLContext sslContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</span><br><span class="line">        TrustManagerFactory trustManagerFactory = TrustManagerFactory.</span><br><span class="line">                getInstance(TrustManagerFactory.getDefaultAlgorithm());</span><br><span class="line">        trustManagerFactory.init(keyStore);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化keystore</span></span><br><span class="line">        KeyStore clientKeyStore = KeyStore.getInstance(<span class="string">"BKS"</span>);</span><br><span class="line">        clientKeyStore.load(mContext.getAssets().open(<span class="string">"xyuxiao_client.bks"</span>), <span class="string">"123456"</span>.toCharArray());</span><br><span class="line"></span><br><span class="line">        KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());</span><br><span class="line">        keyManagerFactory.init(clientKeyStore, <span class="string">"123456"</span>.toCharArray());</span><br><span class="line"></span><br><span class="line">        sslContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), <span class="keyword">new</span> SecureRandom());</span><br><span class="line">        mOkHttpClient.setSslSocketFactory(sslContext.getSocketFactory());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/记录/" rel="tag"># 记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/09/android_retrofit/" rel="next" title="retrofit">
+                <i class="fa fa-chevron-left"></i> retrofit
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/12/android_recyclerview/" rel="prev" title="recyclerview">
+                recyclerview <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="xyuxiao">
+            
+              <p class="site-author-name" itemprop="name">xyuxiao</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问自签名网站"><span class="nav-number">1.</span> <span class="nav-text">访问自签名网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端Tomcat下部署"><span class="nav-number">3.</span> <span class="nav-text">服务端Tomcat下部署</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#生成jds"><span class="nav-number">3.1.</span> <span class="nav-text">生成jds</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据jks生成cer证书"><span class="nav-number">3.2.</span> <span class="nav-text">根据jks生成cer证书</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置Tomcat-打开tomcat-conf-server-xml-在Server标签下添加"><span class="nav-number">3.3.</span> <span class="nav-text">配置Tomcat,打开tomcat/conf/server.xml,在Server标签下添加</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双向证书"><span class="nav-number">4.</span> <span class="nav-text">双向证书</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置服务器"><span class="nav-number">4.1.</span> <span class="nav-text">配置服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置客户端"><span class="nav-number">4.2.</span> <span class="nav-text">配置客户端</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyuxiao</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value"> 访问人数:</span>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value"> 访问次数:</span>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '91632d3a671d19305b9d',
+    clientSecret: '175c31ef8f9f9892a4b3d063193fce2079c9cf16',
+    repo: 'xyuxiao.github.io',
+    owner: 'xyuxiao',
+    admin: ['xyuxiao'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="编译内核123编译make之前需要先编译内核make firefly-rk3288-reload_defconfigmake firefly-rk3288-reload.img -j16">
+<meta name="keywords" content="记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓源码编译问题汇总">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/android_source_question/index.html">
+<meta property="og:site_name" content="xyuxiao">
+<meta property="og:description" content="编译内核123编译make之前需要先编译内核make firefly-rk3288-reload_defconfigmake firefly-rk3288-reload.img -j16">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/git/so_question_1.png">
+<meta property="og:image" content="http://yoursite.com/images/git/system_ui_1.png">
+<meta property="og:image" content="http://yoursite.com/images/git/system_ui_2.png">
+<meta property="og:updated_time" content="2021-06-08T03:08:05.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓源码编译问题汇总">
+<meta name="twitter:description" content="编译内核123编译make之前需要先编译内核make firefly-rk3288-reload_defconfigmake firefly-rk3288-reload.img -j16">
+<meta name="twitter:image" content="http://yoursite.com/images/git/so_question_1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/android_source_question/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>安卓源码编译问题汇总 | xyuxiao</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xyuxiao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">如梦一场</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/android_source_question/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">安卓源码编译问题汇总
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-02 09:02:00" itemprop="dateCreated datePublished" datetime="2018-01-02T09:02:00Z">2018-01-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:08:05" itemprop="dateModified" datetime="2021-06-08T03:08:05Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h3><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编译<span class="built_in">make</span>之前需要先编译内核</span><br><span class="line"><span class="built_in">make</span> firefly-rk3288-reload_defconfig</span><br><span class="line"><span class="built_in">make</span> firefly-rk3288-reload.img -j16</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="bin-bash-javah-command-not-found"><a href="#bin-bash-javah-command-not-found" class="headerlink" title="/bin/bash: javah: command not found"></a>/bin/bash: javah: command not found</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/usr/</span>bin  目录下执行 </span><br><span class="line">ln -s -f <span class="regexp">/usr/</span>java<span class="regexp">/jdk1.6.0_30/</span>bin/javah</span><br><span class="line"></span><br><span class="line"><span class="regexp">/usr/</span>java/jdk1<span class="number">.6</span><span class="number">.0</span>_30为jdk所在目录</span><br><span class="line"></span><br><span class="line"><span class="regexp">/bin/</span><span class="string">bash:</span> <span class="string">javah:</span> command not found</span><br><span class="line"><span class="regexp">/bin/</span><span class="string">bash:</span> <span class="string">javadoc:</span> command not found</span><br><span class="line"><span class="regexp">/bin/</span><span class="string">bash:</span> <span class="string">jar:</span> command not found</span><br><span class="line">此类问题都可以用本方法解决</span><br></pre></td></tr></table></figure>
+<h3 id="lunch"><a href="#lunch" class="headerlink" title="lunch"></a>lunch</h3><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lunch之后<span class="built_in">make</span>之前需要先clean一下----&gt;<span class="built_in">make</span> installclean</span><br></pre></td></tr></table></figure>
+<h3 id="打升级包update-img"><a href="#打升级包update-img" class="headerlink" title="打升级包update.img"></a>打升级包update.img</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">make otapackage</span></span><br></pre></td></tr></table></figure>
+<h3 id="屏幕暗屏操作"><a href="#屏幕暗屏操作" class="headerlink" title="屏幕暗屏操作"></a>屏幕暗屏操作</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 给文件system权限</span><br><span class="line">在device/rockchip/common里加上chown system system </span><br><span class="line"><span class="number">2.</span> 修改屏幕亮暗屏 </span><br><span class="line">修改文件/sys/class/backlight/rk28_bl/bl_power</span><br><span class="line">echo <span class="string">"0"</span> &gt; /sys/class/backlight/rk28_bl/bl_power <span class="comment">//1 暗屏 0 亮屏</span></span><br><span class="line"><span class="comment">//命令行没有权限的时候写文件</span></span><br><span class="line"><span class="built_in">File</span> f = <span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"sys/class/backlight/rk28_bl/bl_power"</span>);</span><br><span class="line">OutputStream os = <span class="keyword">new</span> FileOutputStream(f);</span><br><span class="line">os.<span class="built_in">write</span>(<span class="string">"0\n"</span>.getBytes());</span><br><span class="line">os.<span class="built_in">flush</span>();</span><br><span class="line">os.<span class="built_in">close</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="升级包"><a href="#升级包" class="headerlink" title="升级包"></a>升级包</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">生成zip文件目录 out/target/product/rk3288_box</span><br><span class="line"></span><br><span class="line"><span class="comment">//生成增量包</span></span><br><span class="line">./build/tools/releasetools/ota_from_target_files -<span class="selector-tag">i</span> A<span class="selector-class">.zip</span> B<span class="selector-class">.zip</span> update.zip</span><br><span class="line">    </span><br><span class="line"><span class="comment">//增量包A.zip和B.zip需要在这里找</span></span><br><span class="line">out/target/product/rk3288_box/obj/PACKAGING/target_files_intermediates/</span><br></pre></td></tr></table></figure>
+<h3 id="添加so文件或者其他程序中需要的文件到系统里"><a href="#添加so文件或者其他程序中需要的文件到系统里" class="headerlink" title="添加so文件或者其他程序中需要的文件到系统里"></a>添加so文件或者其他程序中需要的文件到系统里</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在device/rockchip/common下修改devices.mk</span><br><span class="line"><span class="number">1</span>.自用语音文件从当前目录复制文件到system/tts/下</span><br><span class="line">PRODUCT_COPY_FILES += device/rockchip/common/<span class="symbol">backend_female:</span>system/tts/backend_female</span><br><span class="line"><span class="number">2</span>.so文件复制到system/<span class="class"><span class="keyword">lib</span>/下</span></span><br><span class="line">PRODUCT_COPY_FILES += device/rockchip/common/libyzstts.<span class="symbol">so:</span>system/<span class="class"><span class="keyword">lib</span>/<span class="title">libyzstts</span>.<span class="title">so</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="开机速度慢"><a href="#开机速度慢" class="headerlink" title="开机速度慢"></a>开机速度慢</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hardware<span class="meta-keyword">/rockchip/</span>camera/Config下的cam_board_rk3288.xml里面每一个<span class="params">&lt;CamDevie&gt;</span>为一个相机,把多余的删除</span><br></pre></td></tr></table></figure>
+<h3 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device<span class="regexp">/rockchip/</span>rk3288<span class="regexp">/rk3288.mk</span></span><br></pre></td></tr></table></figure>
+<h3 id="获取系统参数"><a href="#获取系统参数" class="headerlink" title="获取系统参数"></a>获取系统参数</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SystemProperties.<span class="builtin-name">get</span>(<span class="string">""</span>);</span><br><span class="line">系统版本 SystemProperties.<span class="builtin-name">get</span>(<span class="string">"ro.product.version"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="设置参数"><a href="#设置参数" class="headerlink" title="设置参数"></a>设置参数</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Settings<span class="meta">.Global</span>.putString(ContentResolver,<span class="string">""</span>,<span class="string">""</span>)<span class="comment">;</span></span><br><span class="line">NTP服务器 Settings<span class="meta">.Global</span>.putString(mContext.getContentResolver(), Settings<span class="meta">.Global</span>.NTP_SERVER, <span class="string">""</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="mm的时候报错"><a href="#mm的时候报错" class="headerlink" title="mm的时候报错"></a>mm的时候报错</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PRODUCT_COPY_FILES device/rockchip/common/fstab<span class="selector-class">.rk30board</span><span class="selector-class">.bootmode</span><span class="selector-class">.unknown</span>:root/fstab<span class="selector-class">.rk30board</span><span class="selector-class">.bootmode</span><span class="selector-class">.unknown</span> ignored.</span><br><span class="line">PRODUCT_COPY_FILES device/rockchip/common/fstab<span class="selector-class">.rk30board</span><span class="selector-class">.bootmode</span><span class="selector-class">.emmc</span>:root/fstab<span class="selector-class">.rk30board</span><span class="selector-class">.bootmode</span><span class="selector-class">.emmc</span> ignored.</span><br><span class="line">PRODUCT_COPY_FILES vendor/rockchip/common/nand/modules/arm/rk30xxnand_ko<span class="selector-class">.ko</span>.<span class="number">3.10</span>.<span class="number">0</span>:root/rk30xxnand_ko<span class="selector-class">.ko</span>.<span class="number">3.10</span>.<span class="number">0</span> ignored.</span><br><span class="line">make:进入目录<span class="string">'/home/xyuxiao/source/GunCabinet'</span></span><br><span class="line">host Prebuilt: drmsigntool (out/host/linux-x86/obj/EXECUTABLES/drmsigntool_intermediates/drmsigntool)</span><br><span class="line">Install: out/host/linux-x86/bin/drmsigntool</span><br><span class="line">make:离开目录“/home/xyuxiao/source/GunCabinet”</span><br><span class="line">    </span><br><span class="line">解决方法:不用source  build/envsetup<span class="selector-class">.sh</span>,改用 <span class="selector-class">.build</span><span class="selector-class">.sh</span></span><br></pre></td></tr></table></figure>
+<h3 id="make-otapackage的时候报错"><a href="#make-otapackage的时候报错" class="headerlink" title="make otapackage的时候报错"></a>make otapackage的时候报错</h3><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Install system fs image: <span class="keyword">out</span>/target/product/rk3288_box/system.img</span><br><span class="line"><span class="keyword">out</span>/target/product/rk3288_box/system.img+<span class="keyword">out</span>/target/product/rk3288_box/obj/PACKAGING/recovery_patch_intermediates/recovery_from_boot.p maxsize=<span class="number">1096212480</span> blocksize=<span class="number">135168</span> total=<span class="number">601434444</span> reserve=<span class="number">11083776</span></span><br><span class="line">Import includes <span class="keyword">file</span>: <span class="keyword">out</span>/target/product/rk3288_box/obj/EXECUTABLES/updater_intermediates/import_includes</span><br><span class="line">target thumb C: updater &lt;= bootable/recovery/updater/updater.c</span><br><span class="line">bootable/recovery/updater/updater.c: <span class="keyword">In</span> <span class="keyword">function</span> <span class="symbol">'main</span>':</span><br><span class="line">bootable/recovery/updater/updater.c:<span class="number">74</span>:<span class="number">17</span>: <span class="literal">warning</span>: assignment discards <span class="symbol">'const</span>' qualifier from pointer target <span class="keyword">type</span> [enabled by <span class="keyword">default</span>]</span><br><span class="line">g_package_file = package_filename;</span><br><span class="line">             ^</span><br><span class="line">target StaticExecutable: updater (<span class="keyword">out</span>/target/product/rk3288_box/obj/EXECUTABLES/updater_intermediates/LINKED/updater)</span><br><span class="line">target Symbolic: updater (<span class="keyword">out</span>/target/product/rk3288_box/symbols/system/bin/updater)</span><br><span class="line">APK certs list: <span class="keyword">out</span>/target/product/rk3288_box/obj/PACKAGING/apkcerts_intermediates/rk3288_box-apkcerts-eng.xyuxiao.txt</span><br><span class="line"># <span class="keyword">In</span> <span class="keyword">case</span> value <span class="keyword">of</span> PACKAGES <span class="keyword">is</span> empty.</span><br><span class="line">No RK Loader <span class="keyword">for</span> TARGET_DEVICE rk3288_box <span class="keyword">to</span> otapackage</span><br><span class="line"><span class="keyword">package</span> add resource.img <span class="keyword">to</span> BOOT <span class="keyword">and</span> RECOVERY</span><br><span class="line">No uboot <span class="keyword">for</span> uboot/uboot.img <span class="keyword">to</span> otapackage</span><br><span class="line">No trust <span class="keyword">for</span> uboot/trust.img <span class="keyword">to</span> otapackage</span><br><span class="line">No charge <span class="keyword">for</span> uboot/charge.img <span class="keyword">to</span> otapackage</span><br><span class="line">No <span class="keyword">parameter</span> <span class="keyword">for</span> TARGET_DEVICE rk3288_box <span class="keyword">to</span> otapackage</span><br><span class="line"><span class="keyword">Package</span> target files: <span class="keyword">out</span>/target/product/rk3288_box/obj/PACKAGING/target_files_intermediates/rk3288_box-target_files-eng.xyuxiao.zip</span><br><span class="line">ls: 无法访问<span class="keyword">out</span>/target/product/rk3288_box/data: 没有那个文件或目录</span><br><span class="line">building image from target_files RECOVERY...</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">    <span class="keyword">File</span> <span class="string">"./build/tools/releasetools/make_recovery_patch"</span>, <span class="literal">line</span> <span class="number">68</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">main(sys.argv[<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">File</span> <span class="string">"./build/tools/releasetools/make_recovery_patch"</span>, <span class="literal">line</span> <span class="number">39</span>, <span class="keyword">in</span> main</span><br><span class="line">input_dir, <span class="string">"RECOVERY"</span>)</span><br><span class="line">    <span class="keyword">File</span> <span class="string">"/home/xyuxiao/source/GunCabinet/build/tools/releasetools/common.py"</span>, <span class="literal">line</span> <span class="number">419</span>, <span class="keyword">in</span> GetBootableImage</span><br><span class="line">info_dict)</span><br><span class="line">    <span class="keyword">File</span> <span class="string">"/home/xyuxiao/source/GunCabinet/build/tools/releasetools/common.py"</span>, <span class="literal">line</span> <span class="number">376</span>, <span class="keyword">in</span> BuildBootableImage</span><br><span class="line">p4 = Run(sign_cmd)</span><br><span class="line">    <span class="keyword">File</span> <span class="string">"/home/xyuxiao/source/GunCabinet/build/tools/releasetools/common.py"</span>, <span class="literal">line</span> <span class="number">86</span>, <span class="keyword">in</span> Run</span><br><span class="line"><span class="keyword">return</span> subprocess.Popen(args, **kwargs)</span><br><span class="line">    <span class="keyword">File</span> <span class="string">"/usr/lib/python2.7/subprocess.py"</span>, <span class="literal">line</span> <span class="number">710</span>, <span class="keyword">in</span> __init__</span><br><span class="line">errread, errwrite)</span><br><span class="line">    <span class="keyword">File</span> <span class="string">"/usr/lib/python2.7/subprocess.py"</span>, <span class="literal">line</span> <span class="number">1327</span>, <span class="keyword">in</span> _execute_child</span><br><span class="line">raise child_exception</span><br><span class="line">OSError: [Errno <span class="number">2</span>] No such <span class="keyword">file</span> <span class="keyword">or</span> directory</span><br><span class="line">make: *** [<span class="keyword">out</span>/target/product/rk3288_box/obj/PACKAGING/target_files_intermediates/rk3288_box-target_files-eng.xyuxiao.zip] 错误 <span class="number">1</span></span><br><span class="line">#### make failed <span class="keyword">to</span> build some targets (<span class="number">03</span>:<span class="number">46</span> (mm:ss)) ####</span><br><span class="line"></span><br><span class="line"> 解决方法:</span><br><span class="line"><span class="number">1</span>.cd build/tools/drmsigntool/,然后mm -B,再回到源码根目录下make otapackage</span><br><span class="line"><span class="number">2</span>.device/rockchip/common/releasetools.py里面<span class="number">138</span> 行的try的缩进不对导致。</span><br></pre></td></tr></table></figure>
+<h3 id="给串口添加权限"><a href="#给串口添加权限" class="headerlink" title="给串口添加权限"></a>给串口添加权限</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">device/rockchip/common下的ueventd.rockchip.rc在最后添加</span><br><span class="line"><span class="comment"># change ttys owner</span></span><br><span class="line">/dev/ttyS0 0666<span class="built_in"> system </span>system</span><br><span class="line">/dev/ttyS1 0666<span class="built_in"> system </span>system</span><br><span class="line">/dev/ttyS2 0666<span class="built_in"> system </span>system</span><br><span class="line">/dev/ttyS3 0666<span class="built_in"> system </span>system</span><br><span class="line">/dev/ttyS4 0666<span class="built_in"> system </span>system</span><br></pre></td></tr></table></figure>
+<h3 id="未响应弹框"><a href="#未响应弹框" class="headerlink" title="未响应弹框"></a>未响应弹框</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frameworks<span class="meta-keyword">/base/</span>services<span class="meta-keyword">/core/</span>java<span class="meta-keyword">/com/</span>android<span class="meta-keyword">/server/</span>am/ActivityManagerService里<span class="number">1320</span>行</span><br><span class="line">SHOW_ERROR_MSG,SHOW_NOT_RESPONDING_MSG,SHOW_STRICT_MODE_VIOLATION_MSG,SHOW_FACTORY_ERROR_MSG</span><br></pre></td></tr></table></figure>
+<h3 id="多屏显示"><a href="#多屏显示" class="headerlink" title="多屏显示"></a>多屏显示</h3><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span><span class="number">-07</span> <span class="number">17</span>:06:28.389 446-463/system_process W/Binder: Caught a RuntimeException from the binder stub implementation.</span><br><span class="line">                                                    java.lang.NullPointerException: Attempt to invoke interface method '<span class="keyword">int</span> android.app.IActivityManager.checkPermission(java.lang.String, <span class="keyword">int</span>, <span class="keyword">int</span>)' on a <span class="keyword">null</span> object reference</span><br><span class="line">                                                    at android.app.ContextImpl.checkPermission(ContextImpl.java:1882)</span><br><span class="line">                                                    at android.app.ContextImpl.checkCallingOrSelfPermission(ContextImpl.java:1923)</span><br><span class="line">                                                    at android.app.ContextImpl.enforceCallingOrSelfPermission(ContextImpl.java:1960)</span><br><span class="line">                                                    at com.android.server.power.PowerManagerService$BinderService.acquireWakeLock(PowerManagerService.java:3066)</span><br><span class="line">                                                    at android.os.IPowerManager$Stub.onTransact(IPowerManager.java:66)</span><br><span class="line">                                                    at android.os.Binder.execTransact(Binder.java:446)</span><br><span class="line">    </span><br><span class="line">    修改了 frameworks/base/core/java/android/app/ContextImpl.java  1876行 </span><br><span class="line">    从</span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> checkPermission(String permission, <span class="keyword">int</span> pid, <span class="keyword">int</span> uid) &#123;</span><br><span class="line">        <span class="keyword">if</span> (permission == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"permission is null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ActivityManagerNative.getDefault().checkPermission(</span><br><span class="line">                    permission, pid, uid);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> PackageManager.PERMISSION_DENIED;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    改为</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">checkPermission</span><span class="params">(String permission, <span class="keyword">int</span> pid, <span class="keyword">int</span> uid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (permission == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"permission is null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(ActivityManagerNative.getDefault() == <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> PackageManager.PERMISSION_DENIED;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ActivityManagerNative.getDefault().checkPermission(</span><br><span class="line">                    permission, pid, uid);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> PackageManager.PERMISSION_DENIED;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="number">12</span><span class="number">-07</span> <span class="number">17</span>:06:29.733 446-446/system_process A/BluetoothManagerService: Unable to resolve SystemUI's UID.</span><br><span class="line">                                                                         android.content.pm.PackageManager$NameNotFoundException: com.android.systemui</span><br><span class="line">                                                                         at android.app.ApplicationPackageManager.getPackageUid(ApplicationPackageManager.java:209)</span><br><span class="line">                                                                         at com.android.server.BluetoothManagerService.&lt;init&gt;(BluetoothManagerService.java:248)</span><br><span class="line">                                                                         at com.android.server.SystemServer.startOtherServices(SystemServer.java:520)</span><br><span class="line">                                                                         at com.android.server.SystemServer.run(SystemServer.java:260)</span><br><span class="line">                                                                         at com.android.server.SystemServer.main(SystemServer.java:174)</span><br><span class="line">                                                                         at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">                                                                         at java.lang.reflect.Method.invoke(Method.java:372)</span><br><span class="line">                                                                         at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:963)</span><br><span class="line">                                                                         at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:758)</span><br><span class="line">                                                                         </span><br><span class="line">    修改frameworks/base/services/java/com/android/server/SystemServer   </span><br><span class="line">    注释</span><br><span class="line">    509行</span><br><span class="line">    <span class="keyword">if</span> (isEmulator) &#123;</span><br><span class="line">        Slog.i(TAG, <span class="string">"No Bluetooh Service (emulator)"</span>);</span><br><span class="line">    &#125; <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(mFactoryTestMode == FactoryTest.FACTORY_TEST_LOW_LEVEL)</span> </span>&#123;</span><br><span class="line">        Slog.i(TAG, <span class="string">"No Bluetooth Service (factory test)"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(!context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) &#123;</span><br><span class="line">        Slog.i(TAG, <span class="string">"No Bluetooth Service (Bluetooth Hardware Not Present)"</span>);</span><br><span class="line">    &#125; <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(disableBluetooth)</span> </span>&#123;</span><br><span class="line">        Slog.i(TAG, <span class="string">"Bluetooth Service disabled by config"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Slog.i(TAG, <span class="string">"Bluetooth Manager Service"</span>);</span><br><span class="line">        bluetooth = <span class="keyword">new</span> BluetoothManagerService(context);</span><br><span class="line">        ServiceManager.addService(BluetoothAdapter.BLUETOOTH_MANAGER_SERVICE, bluetooth);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="number">1113</span>行</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        startSystemUi(context);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">       reportWtf(<span class="string">"starting System UI"</span>, e);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="so文件放入系统-解决运行程序找不到so文件问题"><a href="#so文件放入系统-解决运行程序找不到so文件问题" class="headerlink" title="so文件放入系统,解决运行程序找不到so文件问题"></a>so文件放入系统,解决运行程序找不到so文件问题</h4><p><img src="/images/git/so_question_1.png" alt></p>
+<h4 id="AndroidStudio为系统级应用加入系统签名"><a href="#AndroidStudio为系统级应用加入系统签名" class="headerlink" title="AndroidStudio为系统级应用加入系统签名"></a>AndroidStudio为系统级应用加入系统签名</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">使用keytool-importkeypair添加系统签名</span><br><span class="line">下载地址：https:<span class="comment">//github.com/getfatday/keytool-importkeypair</span></span><br><span class="line"></span><br><span class="line">需要：platform<span class="selector-class">.x509</span><span class="selector-class">.pem</span>、platform.pk8（位于../build/target/product/security）</span><br><span class="line"></span><br><span class="line">将以上两个文件放置到keytool-importkeypair的目录中，然后使用以下命令生产jks文件：</span><br><span class="line">./keytool-importkeypair -k jjj<span class="selector-class">.jks</span> -<span class="selector-tag">p</span> <span class="number">111111</span> -pk8 platform<span class="selector-class">.pk8</span> -cert platform<span class="selector-class">.x509</span><span class="selector-class">.pem-</span> alias platform</span><br><span class="line"></span><br><span class="line">具体格式依据如下：</span><br><span class="line">./keytool-importkeypair -k [生成的jks文件名] -<span class="selector-tag">p</span> [jks的密码] -pk8 platform<span class="selector-class">.pk8</span> -cert platform<span class="selector-class">.x509</span><span class="selector-class">.pem</span> -alias [jks的别名]</span><br><span class="line"></span><br><span class="line">然后在app的gradle文件中加入如下（如果部分内容已有，则修改）：</span><br><span class="line">buildTypes&#123;</span><br><span class="line">    release&#123;</span><br><span class="line">        minifyEnabled false</span><br><span class="line">        proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>),<span class="string">'proguard-rules.pro'</span></span><br><span class="line">    &#125;</span><br><span class="line">    debug&#123;</span><br><span class="line">        signingConfig signingConfigs.debug</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">并且在buildTypes同级目录加入如下：</span><br><span class="line">signingConfigs&#123;</span><br><span class="line">    release&#123;storeFilefile(<span class="string">'key.jks'</span>)</span><br><span class="line">    storePassword <span class="string">'111111'</span></span><br><span class="line">    keyAlias <span class="string">'platform'</span></span><br><span class="line">    keyPassword <span class="string">'111111'</span></span><br><span class="line">&#125;</span><br><span class="line">debug&#123;</span><br><span class="line">    storeFilefile(<span class="string">'..\\key.jks'</span>)</span><br><span class="line">    storePassword <span class="string">'111111'</span></span><br><span class="line">    keyAlias <span class="string">'platform'</span></span><br><span class="line">    keyPassword <span class="string">'111111'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">注意：debug标签中的key.jks文件路径，参考目录为app的目录。</span><br><span class="line">至此，就可以对应用进行系统签名调试了</span><br></pre></td></tr></table></figure>
+<h4 id="使用隐藏的api"><a href="#使用隐藏的api" class="headerlink" title="使用隐藏的api"></a>使用隐藏的api</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">将系统编译结果out<span class="regexp">/target/</span>common<span class="regexp">/obj/</span>JAVA_LIBRARIES<span class="regexp">/framework_intermediates/</span>classes.jar拷贝出来，重命名为framework.jar</span><br><span class="line"></span><br><span class="line">然后放置于模块下的libs目录中</span><br><span class="line"></span><br><span class="line">右键单击我们要开发的模块进行配置</span><br></pre></td></tr></table></figure>
+<p><img src="/images/git/system_ui_1.png" alt></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将刚才新加的<span class="selector-tag">framework</span><span class="selector-class">.jar</span>添加为<span class="selector-tag">provided</span>依赖</span><br></pre></td></tr></table></figure>
+<p><img src="/images/git/system_ui_2.png" alt></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">修改项目级的build.gradle，加入以下内容</span><br><span class="line"></span><br><span class="line"><span class="keyword">allprojects</span>&#123;</span><br><span class="line">    <span class="keyword">repositories</span>&#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    gradle.projectsEvaluated&#123;</span><br><span class="line">        tasks.withType(JavaCompile)&#123;</span><br><span class="line">            <span class="comment">//注意：windows中这里的路径是这样的app\\libs\\framework.jar，不能是"/".linux中是"/"</span></span><br><span class="line">            <span class="keyword">options</span>.compilerArgs.add(<span class="string">'-Xbootclasspath/p:app\\libs\\framework.jar'</span>)<span class="comment">//这里是让自己的jar包优先于系统sdk的关键。</span></span><br><span class="line">            <span class="comment">//-Xbootclasspath:bootclasspath让jvm从指定的路径中加载bootclass，用来替换jdk的rt.jar。一般不会用到。</span></span><br><span class="line">            <span class="comment">//-Xbootclasspath/a:path被指定的文件追加到默认的bootstrap路径中。</span></span><br><span class="line">            <span class="comment">//-Xbootclasspath/p:path让jvm优先于默认的bootstrap去加载path中指定的class</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">注意，原先已有<span class="keyword">allprojects</span>节点，在里面加入没有的内容就行</span><br><span class="line"></span><br><span class="line">至此，可以使用隐藏的API了，虽然代码中还是红的，但是可以编译通过</span><br></pre></td></tr></table></figure>
+<h4 id="在Android源码下编译jni所需要知道的事"><a href="#在Android源码下编译jni所需要知道的事" class="headerlink" title="在Android源码下编译jni所需要知道的事"></a>在Android源码下编译jni所需要知道的事</h4><ol>
+<li><p>android源码环境下编译so包，编出来的.so的包前面不会自动给添加lib,NDK编译会自动给添加lib，即使Android.mk文件里面LOCAL_MODULE ：=名字前面没有lib,NDK也会自动给你添加lib.</p>
+<p> 所以NDK编译时Android.mk文件编译出来的so包名字可以加lib也可不加，但源码下编译必须加</p>
+</li>
+<li><p>系统应用和用户应用的区别</p>
+<p> 在package/app下的工程 编译后生成的apk都会在system/app下 将系统 烧录到手机后 这些apk都会作为系统应用，系统应用所使用到的.so库全部在system/lib下面，若没有则会出错。这就是为什么源码下编译jni生成的库会放在out/target/product/xxxxxxxx_xx_m0/system/lib</p>
+<p> 用户应用会默认到应用的data/data目录的lib文件夹下找.so，如果找不到就会报错误。当前前提是你的系统system/lib下没有同样的so文件.</p>
+</li>
+<li><p>adb push 与 adb install 区别</p>
+<p> adb push 能够指定安装目录。比如执行”adb push xxx.apk system/app” 后，xxx.apk被安装到了system/app目录下。 这时候就是系统应用 adb install 用此命令安装的软件位于 data/app 目录，则为user application。</p>
+</li>
+<li><p>当我们修改系统应用中的jni文件，你刷机后，系统的system/lib下就有你需要的so文件了。如果你不想刷机，你也可以通过adb push .so \system\lib的方式，将.so放到system\lib下，以供调用，因为不刷机系统中的system/lib下并没有刚才生成的.so</p>
+</li>
+<li><p>如果我们没有jni文件只有.so的话，系统应用因为需要在system/lib下调用.so，所有我们就需要在编译的时候将这个.so文件预置到out/target/product/xxxxxxxx_xx_m0/system/lib中</p>
+<p> include $(CLEAR_VARS)</p>
+<p> LOCAL_MODULE := libfp_gf_mp</p>
+<p> LOCAL_SRC_FILES := ../libs/arm64-v8a/libfp_gf_mp.so</p>
+<p> LOCAL_MODULE_TAGS := optional</p>
+<p> LOCAL_MODULE_SUFFIX := .so</p>
+<p> LOCAL_PROPRIETARY_MODULE := true</p>
+<p> LOCAL_MODULE_CLASS := SHARED_LIBRARIES</p>
+<p> include $(BUILD_PREBUILT)</p>
+</li>
+<li><p>直接使用.so 库 步骤</p>
+<ul>
+<li>第三方的so文件或者别人编译好的so文件，你可以直接放到 libs/armeabi 下</li>
+<li>在主文件夹的Android.mk中加上依赖 LOCAL_JNI_SHARED_LIBRARIES := libuserbookpatcher_jni</li>
+<li><p>如果是系统应用则要在jni的Android.mk中将.so文件预置到system/lib中</p>
+<p>注：在程序中用jni文件生成.so不用进行预置，因为会直接生成到里面system/lib中 但是主文件夹的Android.mk中加上依赖 LOCAL_JNI_SHARED_LIBRARIES := libuserbookpatcher_jni</p>
+</li>
+</ul>
+</li>
+<li><p>在工程目录的Android.mk中 最后加上</p>
+<p> Use the folloing include to make our test apk.</p>
+<p> include $(call all-makefiles-under,$(LOCAL_PATH))</p>
+<p> 会将当前工程目录所有子目录中的Android.mk进行编译</p>
+</li>
+</ol>
+<h4 id="frameworks-base-packages-SystemUI-res-layout-status-bar-xml-58-error-Error-This-attribute-must-be-localized-at-‘text’-with-value-‘11111’"><a href="#frameworks-base-packages-SystemUI-res-layout-status-bar-xml-58-error-Error-This-attribute-must-be-localized-at-‘text’-with-value-‘11111’" class="headerlink" title="frameworks/base/packages/SystemUI/res/layout/status_bar.xml:58: error: Error: This attribute must be localized. (at ‘text’ with value ‘11111’)."></a>frameworks/base/packages/SystemUI/res/layout/status_bar.xml:58: error: Error: This attribute must be localized. (at ‘text’ with value ‘11111’).</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">放到<span class="built_in">values</span>里，再读取，这是android强制实行多语言话</span><br></pre></td></tr></table></figure>
+<h4 id="在vendor下创建自己公司的编译选项"><a href="#在vendor下创建自己公司的编译选项" class="headerlink" title="在vendor下创建自己公司的编译选项"></a>在vendor下创建自己公司的编译选项</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir vendor/xyuxiao/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> touch vendor/xyuxiao/vendorsetup.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"add_lunch_combo xyuxiao-eng"</span> &gt; vendor/xyuxiao/vendorsetup.sh</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/记录/" rel="tag"># 记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/20/android_source_systemui/" rel="next" title="Android-SystemUI">
+                <i class="fa fa-chevron-left"></i> Android-SystemUI
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/04/java_question/" rel="prev" title="java问题汇总">
+                java问题汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="xyuxiao">
+            
+              <p class="site-author-name" itemprop="name">xyuxiao</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译内核"><span class="nav-number">1.</span> <span class="nav-text">编译内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bin-bash-javah-command-not-found"><span class="nav-number">2.</span> <span class="nav-text">/bin/bash: javah: command not found</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lunch"><span class="nav-number">3.</span> <span class="nav-text">lunch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打升级包update-img"><span class="nav-number">4.</span> <span class="nav-text">打升级包update.img</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#屏幕暗屏操作"><span class="nav-number">5.</span> <span class="nav-text">屏幕暗屏操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级包"><span class="nav-number">6.</span> <span class="nav-text">升级包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加so文件或者其他程序中需要的文件到系统里"><span class="nav-number">7.</span> <span class="nav-text">添加so文件或者其他程序中需要的文件到系统里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开机速度慢"><span class="nav-number">8.</span> <span class="nav-text">开机速度慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统版本"><span class="nav-number">9.</span> <span class="nav-text">系统版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取系统参数"><span class="nav-number">10.</span> <span class="nav-text">获取系统参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置参数"><span class="nav-number">11.</span> <span class="nav-text">设置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mm的时候报错"><span class="nav-number">12.</span> <span class="nav-text">mm的时候报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-otapackage的时候报错"><span class="nav-number">13.</span> <span class="nav-text">make otapackage的时候报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给串口添加权限"><span class="nav-number">14.</span> <span class="nav-text">给串口添加权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未响应弹框"><span class="nav-number">15.</span> <span class="nav-text">未响应弹框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多屏显示"><span class="nav-number">16.</span> <span class="nav-text">多屏显示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#so文件放入系统-解决运行程序找不到so文件问题"><span class="nav-number">16.1.</span> <span class="nav-text">so文件放入系统,解决运行程序找不到so文件问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AndroidStudio为系统级应用加入系统签名"><span class="nav-number">16.2.</span> <span class="nav-text">AndroidStudio为系统级应用加入系统签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用隐藏的api"><span class="nav-number">16.3.</span> <span class="nav-text">使用隐藏的api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在Android源码下编译jni所需要知道的事"><span class="nav-number">16.4.</span> <span class="nav-text">在Android源码下编译jni所需要知道的事</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#frameworks-base-packages-SystemUI-res-layout-status-bar-xml-58-error-Error-This-attribute-must-be-localized-at-‘text’-with-value-‘11111’"><span class="nav-number">16.5.</span> <span class="nav-text">frameworks/base/packages/SystemUI/res/layout/status_bar.xml:58: error: Error: This attribute must be localized. (at ‘text’ with value ‘11111’).</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在vendor下创建自己公司的编译选项"><span class="nav-number">16.6.</span> <span class="nav-text">在vendor下创建自己公司的编译选项</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyuxiao</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value"> 访问人数:</span>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value"> 访问次数:</span>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '91632d3a671d19305b9d',
+    clientSecret: '175c31ef8f9f9892a4b3d063193fce2079c9cf16',
+    repo: 'xyuxiao.github.io',
+    owner: 'xyuxiao',
+    admin: ['xyuxiao'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

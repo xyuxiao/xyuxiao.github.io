@@ -342,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/note1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/android_okhttp2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -362,7 +362,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/13/note1/" class="post-title-link" itemprop="url">用做记录</a>
+                <a href="/2019/06/20/android_okhttp2/" class="post-title-link" itemprop="url">OkHttp源码阅读-拦截器</a>
               
             
           </h1>
@@ -388,7 +388,7 @@
                 
               
 
-              <time title="创建时间：2019-05-13 15:22:36" itemprop="dateCreated datePublished" datetime="2019-05-13T15:22:36Z">2019-05-13</time>
+              <time title="创建时间：2019-06-19 21:38:27" itemprop="dateCreated datePublished" datetime="2019-06-19T21:38:27Z">2019-06-19</time>
             
 
             
@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-20 07:18:32" itemprop="dateModified" datetime="2020-03-20T07:18:32Z">2020-03-20</time>
+                <time title="修改时间：2021-06-08 03:20:03" itemprop="dateModified" datetime="2021-06-08T03:20:03Z">2021-06-08</time>
               
             
           </span>
@@ -422,14 +422,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Normal/" itemprop="url" rel="index"><span itemprop="name">Normal</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Normal/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
 
                 
                 
@@ -465,16 +458,11 @@
 
       
         
-          <h4 id="正则匹配只存在数字"><a href="#正则匹配只存在数字" class="headerlink" title="正则匹配只存在数字"></a>正则匹配只存在数字</h4><blockquote>
-<p>x.matches(“^\d+$”)</p>
-</blockquote>
-<h4 id="HttpClient关于SDK-gt-23"><a href="#HttpClient关于SDK-gt-23" class="headerlink" title="HttpClient关于SDK&gt;23"></a>HttpClient关于SDK&gt;23</h4><p>Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="attribute">useLibrary</span> <span class="string">'org.apache.http.legacy'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="Android8出现app-is-in-background-uid-UidRecord"><a href="#Android8出现app-is-in-background-uid-UidRecord" class="headerlink" title="Android8出现app is in background uid UidRecord"></a>Android8出现app is in background uid UidRecord</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (<span class="keyword">Build.VERSION.SDK_INT </span>&gt;= <span class="keyword">Build.VERSION_CODES.O) </span>&#123;</span><br><span class="line">    <span class="built_in">context</span>.startForegroundService(m_msgIntent)<span class="comment">;</span></span><br><span class="line">&#125; else &#123;</span><br><span class="line">    <span class="built_in">context</span>.startService(m_msgIntent)<span class="comment">; //</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Android9出现requires-android-permission-FOREGROUND-SERVICE"><a href="#Android9出现requires-android-permission-FOREGROUND-SERVICE" class="headerlink" title="Android9出现requires android.permission.FOREGROUND_SERVICE"></a>Android9出现requires android.permission.FOREGROUND_SERVICE</h4><p>java.lang.SecurityException: Permission Denial: startForeground from pid=9564, uid=12350 requires android.permission.FOREGROUND_SERVICE<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.FOREGROUND_SERVICE"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+          <h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><p>不管是同步还是异步任务最后都会走到getResponseWithInterceptorChain方法中,在这个方法里会创建一个List用于存放一系列的拦截器,包括OkHttp官方定义的,也包括自定义的拦截器,这方法会递归执行所有拦截器在最后CallServerInterceptor中进行数据请求<br></p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/05/13/note1/#more" rel="contents">
+              <a class="btn" href="/2019/06/20/android_okhttp2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -536,7 +524,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/adb/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/android_okhttp1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xyuxiao">
@@ -556,7 +544,750 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/04/29/adb/" class="post-title-link" itemprop="url">adb</a>
+                <a href="/2019/06/18/android_okhttp1/" class="post-title-link" itemprop="url">OkHttp源码阅读</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-17 16:16:23" itemprop="dateCreated datePublished" datetime="2019-06-17T16:16:23Z">2019-06-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:20:04" itemprop="dateModified" datetime="2021-06-08T03:20:04Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val<span class="built_in"> client </span>= OkHttpClient()</span><br><span class="line">val<span class="built_in"> client </span>= OkHttpClient().newBuilder().build()</span><br></pre></td></tr></table></figure>
+<p>在进行请求之前需要先new一个OkHttpClient,OkHttpClient内部是用的构建者模式初始化基础配置<br></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/18/android_okhttp1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/03/cocos_study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/03/cocos_study/" class="post-title-link" itemprop="url">cocos2dx-学习日记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-02 23:24:06" itemprop="dateCreated datePublished" datetime="2019-06-02T23:24:06Z">2019-06-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:13:58" itemprop="dateModified" datetime="2021-06-08T03:13:58Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Cocos/" itemprop="url" rel="index"><span itemprop="name">Cocos</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><p>根据官方GitHub(<a href="https://github.com/cocos2d/cocos2d-x)进行配置,当执行新建项目的时候遇到" target="_blank" rel="noopener">https://github.com/cocos2d/cocos2d-x)进行配置,当执行新建项目的时候遇到</a></p>
+<blockquote>
+<p>cocos new MyGame -p com.xyuxiao.mygame -l cpp -d ../Project/</p>
+</blockquote>
+<ul>
+<li>-p 包名 -l 语言版本 -d 项目路径 </li>
+</ul>
+<blockquote>
+<p>-bash: cocos: command not found<br>//把配进环境变量就行了<br>open ~/.bash_profile<br>export PATH=/Users/xyuxiao/Documents/study/cocos/cocos2d-x/tools/cocos2d-console/bin:$PATH<br>source ~/.bash_profile</p>
+</blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/03/cocos_study/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/android_note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/13/android_note/" class="post-title-link" itemprop="url">Android记录</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-13 15:22:36" itemprop="dateCreated datePublished" datetime="2019-05-13T15:22:36Z">2019-05-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:17:04" itemprop="dateModified" datetime="2021-06-08T03:17:04Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="HttpClient关于SDK-gt-23"><a href="#HttpClient关于SDK-gt-23" class="headerlink" title="HttpClient关于SDK&gt;23"></a>HttpClient关于SDK&gt;23</h4><p>Android23开始把HttpClient删掉了, 在这之后导入HttpClient会提示找不到, 可以在当前module的build.gradle中加入<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="attribute">useLibrary</span> <span class="string">'org.apache.http.legacy'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Android8出现app-is-in-background-uid-UidRecord"><a href="#Android8出现app-is-in-background-uid-UidRecord" class="headerlink" title="Android8出现app is in background uid UidRecord"></a>Android8出现app is in background uid UidRecord</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (<span class="keyword">Build.VERSION.SDK_INT </span>&gt;= <span class="keyword">Build.VERSION_CODES.O) </span>&#123;</span><br><span class="line">    <span class="built_in">context</span>.startForegroundService(m_msgIntent)<span class="comment">;</span></span><br><span class="line">&#125; else &#123;</span><br><span class="line">    <span class="built_in">context</span>.startService(m_msgIntent)<span class="comment">; //</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Android9出现requires-android-permission-FOREGROUND-SERVICE"><a href="#Android9出现requires-android-permission-FOREGROUND-SERVICE" class="headerlink" title="Android9出现requires android.permission.FOREGROUND_SERVICE"></a>Android9出现requires android.permission.FOREGROUND_SERVICE</h4><p>java.lang.SecurityException: Permission Denial: startForeground from pid=9564, uid=12350 requires android.permission.FOREGROUND_SERVICE<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.FOREGROUND_SERVICE"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/13/android_note/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/note_everything/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/13/note_everything/" class="post-title-link" itemprop="url">用做记录</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-13 15:22:36" itemprop="dateCreated datePublished" datetime="2019-05-13T15:22:36Z">2019-05-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:14:25" itemprop="dateModified" datetime="2021-06-08T03:14:25Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="正则匹配只存在数字"><a href="#正则匹配只存在数字" class="headerlink" title="正则匹配只存在数字"></a>正则匹配只存在数字</h4><blockquote>
+<p>x.matches(“^\d+$”)</p>
+</blockquote>
+<h4 id="excel宏计算"><a href="#excel宏计算" class="headerlink" title="excel宏计算"></a>excel宏计算</h4><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 计算()</span><br><span class="line"><span class="comment">'</span></span><br><span class="line"><span class="comment">' 计算 Macro</span></span><br><span class="line"><span class="comment">'</span></span><br><span class="line"><span class="keyword">For</span> ppp = <span class="number">2</span> <span class="keyword">To</span> <span class="number">5000</span> <span class="keyword">Step</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">If</span> Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">1</span>) &lt;&gt; <span class="string">""</span> <span class="keyword">Then</span></span><br><span class="line">        x = Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">1</span>)</span><br><span class="line">        y = Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">2</span>)</span><br><span class="line">        Sheets(<span class="number">1</span>).Cells(ppp, <span class="number">3</span>) = x + y</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span> ppp</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/13/note_everything/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/android_adb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/29/android_adb/" class="post-title-link" itemprop="url">adb</a>
               
             
           </h1>
@@ -599,7 +1330,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-03 08:24:55" itemprop="dateModified" datetime="2019-07-03T08:24:55Z">2019-07-03</time>
+                <time title="修改时间：2021-06-08 03:07:10" itemprop="dateModified" datetime="2021-06-08T03:07:10Z">2021-06-08</time>
               
             
           </span>
@@ -668,7 +1399,743 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/04/29/adb/#more" rel="contents">
+              <a class="btn" href="/2019/04/29/android_adb/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/java_question/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/01/04/java_question/" class="post-title-link" itemprop="url">java问题汇总</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-04 14:02:00" itemprop="dateCreated datePublished" datetime="2018-01-04T14:02:00Z">2018-01-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:10:41" itemprop="dateModified" datetime="2021-06-08T03:10:41Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="Error-parsing-HTTP-request-header"><a href="#Error-parsing-HTTP-request-header" class="headerlink" title="Error parsing HTTP request header"></a>Error parsing HTTP request header</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Error parsing HTTP request header</span><br><span class="line">Note: further occurrences of HTTP <span class="selector-tag">header</span> parsing errors will be logged at DEBUG level.</span><br><span class="line">java<span class="selector-class">.lang</span><span class="selector-class">.IllegalArgumentException</span>: Request <span class="selector-tag">header</span> is too large</span><br><span class="line">    at org<span class="selector-class">.apache</span><span class="selector-class">.coyote</span><span class="selector-class">.http11</span><span class="selector-class">.InternalAprInputBuffer</span><span class="selector-class">.fill</span>(InternalAprInputBuffer<span class="selector-class">.java</span>:<span class="number">574</span>)</span><br><span class="line">    at org<span class="selector-class">.apache</span><span class="selector-class">.coyote</span><span class="selector-class">.http11</span><span class="selector-class">.InternalAprInputBuffer</span><span class="selector-class">.parseRequestLine</span>(InternalAprInputBuffer<span class="selector-class">.java</span>:<span class="number">217</span>)</span><br><span class="line">    at org<span class="selector-class">.apache</span><span class="selector-class">.coyote</span><span class="selector-class">.http11</span><span class="selector-class">.AbstractHttp11Processor</span><span class="selector-class">.process</span>(AbstractHttp11Processor<span class="selector-class">.java</span>:<span class="number">996</span>)</span><br><span class="line">    at org<span class="selector-class">.apache</span><span class="selector-class">.coyote</span><span class="selector-class">.AbstractProtocol</span><span class="variable">$AbstractConnectionHandler</span>.process(AbstractProtocol<span class="selector-class">.java</span>:<span class="number">640</span>)</span><br><span class="line">    at org<span class="selector-class">.apache</span><span class="selector-class">.tomcat</span><span class="selector-class">.util</span><span class="selector-class">.net</span><span class="selector-class">.AprEndpoint</span><span class="variable">$SocketProcessor</span>.doRun(AprEndpoint<span class="selector-class">.java</span>:<span class="number">2517</span>)</span><br><span class="line">    at org<span class="selector-class">.apache</span><span class="selector-class">.tomcat</span><span class="selector-class">.util</span><span class="selector-class">.net</span><span class="selector-class">.AprEndpoint</span><span class="variable">$SocketProcessor</span>.run(AprEndpoint<span class="selector-class">.java</span>:<span class="number">2506</span>)</span><br><span class="line">    at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.ThreadPoolExecutor</span><span class="selector-class">.runWorker</span>(ThreadPoolExecutor<span class="selector-class">.java</span>:<span class="number">1149</span>)</span><br><span class="line">    at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.ThreadPoolExecutor</span><span class="variable">$Worker</span>.run(ThreadPoolExecutor<span class="selector-class">.java</span>:<span class="number">624</span>)</span><br><span class="line">    at org<span class="selector-class">.apache</span><span class="selector-class">.tomcat</span><span class="selector-class">.util</span><span class="selector-class">.threads</span><span class="selector-class">.TaskThread</span><span class="variable">$WrappingRunnable</span>.run(TaskThread<span class="selector-class">.java</span>:<span class="number">61</span>)</span><br><span class="line">    at java<span class="selector-class">.lang</span><span class="selector-class">.Thread</span><span class="selector-class">.run</span>(Thread<span class="selector-class">.java</span>:<span class="number">748</span>)</span><br><span class="line">    </span><br><span class="line">修改tomcat/conf/server.xml</span><br><span class="line">&lt;Connector executor=<span class="string">"tomcatThreadPool"</span> port=<span class="string">"8888"</span> protocol=<span class="string">"HTTP/1.1"</span></span><br><span class="line">        connectionTimeout=<span class="string">"3000"</span></span><br><span class="line">        redirectPort=<span class="string">"9999"</span>  URIEncoding=<span class="string">"UTF-8"</span></span><br><span class="line">	maxHttpHeaderSize=<span class="string">"65536"</span> maxPostSize=<span class="string">"4194304"</span>/&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/01/04/java_question/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/android_source_question/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/01/02/android_source_question/" class="post-title-link" itemprop="url">安卓源码编译问题汇总</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-02 09:02:00" itemprop="dateCreated datePublished" datetime="2018-01-02T09:02:00Z">2018-01-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:08:05" itemprop="dateModified" datetime="2021-06-08T03:08:05Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h3><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编译<span class="built_in">make</span>之前需要先编译内核</span><br><span class="line"><span class="built_in">make</span> firefly-rk3288-reload_defconfig</span><br><span class="line"><span class="built_in">make</span> firefly-rk3288-reload.img -j16</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/01/02/android_source_question/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/20/android_source_systemui/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/04/20/android_source_systemui/" class="post-title-link" itemprop="url">Android-SystemUI</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-04-20 09:21:30" itemprop="dateCreated datePublished" datetime="2017-04-20T09:21:30Z">2017-04-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:08:26" itemprop="dateModified" datetime="2021-06-08T03:08:26Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="显示SystemUI"><a href="#显示SystemUI" class="headerlink" title="显示SystemUI"></a>显示SystemUI</h3><ul>
+<li>frameworks/base/services/java/com/android/server下的SystemServer.java的<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">try</span> &#123;</span><br><span class="line">    <span class="selector-tag">startSystemUi</span>(context);</span><br><span class="line">&#125; <span class="selector-tag">catch</span> (Throwable e) &#123;</span><br><span class="line">        <span class="selector-tag">reportWtf</span>(<span class="string">"starting System UI"</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><a href="http://blog.csdn.net/zwlove5280/article/details/48349331" target="_blank" rel="noopener">http://blog.csdn.net/zwlove5280/article/details/48349331</a><br></p></blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/04/20/android_source_systemui/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/10/android_greendao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xyuxiao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyuxiao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/03/10/android_greendao/" class="post-title-link" itemprop="url">GreenDao</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-03-10 10:02:25" itemprop="dateCreated datePublished" datetime="2017-03-10T10:02:25Z">2017-03-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-08 03:09:48" itemprop="dateModified" datetime="2021-06-08T03:09:48Z">2021-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h4><p><a href="https://git.oschina.net/xyuxiao/GreenDaoDemo.git" target="_blank" rel="noopener">https://git.oschina.net/xyuxiao/GreenDaoDemo.git</a></p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><blockquote>
+<p>build.gradle(Module外)<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">buildscript</span> &#123;</span><br><span class="line">    <span class="keyword">repositories</span> &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">dependencies</span> &#123;</span><br><span class="line">        <span class="keyword">classpath</span> <span class="string">'org.greenrobot:greendao-gradle-plugin:3.2.1'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/03/10/android_greendao/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -718,7 +2185,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -762,7 +2229,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -789,7 +2256,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -814,9 +2285,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -858,7 +2327,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
